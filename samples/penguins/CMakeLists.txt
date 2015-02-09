@@ -1,4 +1,5 @@
+subdirs(gfx)
 include_directories(${yda_SOURCE_DIR}/include)
 link_directories(${yda_SOURCE_DIR}/src)
-add_executable(Penguin main.cpp)
+add_executable(Penguin main.cpp Penguin.cpp)
 target_link_libraries(Penguin yda)
