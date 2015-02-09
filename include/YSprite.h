@@ -6,7 +6,8 @@
 
 /** SDL2 **/
 #include <SDL.h>
-#include <SDL2_image/SDL_image.h>
+//#include <SDL2_image/SDL_image.h>
+#include <SDL_image.h>
 
 
 class YSprite
