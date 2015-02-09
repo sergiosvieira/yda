@@ -2,6 +2,7 @@
 
 /** YDA **/
 #include "YSpriteSheetManager.h"
+#include "YFileSystem.h"
 
 /** Penguin **/
 #include "Penguin.h"
@@ -10,8 +11,42 @@
 #include <functional>
 #undef main
 
+YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
+{
+    typedef struct Sprites
+    {
+        std::string key;
+        std::string value;
+    } Sprite;
+    
+    Sprite sprites[] = {
+        {"background", "scenario.png"},
+        {"penguin", "penguin.png"},
+        {"fish", "fish.png"},
+    };
+    
+    int size = sizeof(sprites) / sizeof(Sprite);
+    bool success = true;
+    YSpriteSheetManager::kError result;
+    
+    for (int i = 0; i < size; ++i)
+    {
+        std::string key = sprites[i].key;
+        std::string value = YFileSystem::getCurrentDir() + "/" + sprites[i].value;
+        
+        result = a_manager->add(key, value);
+
+        if (result != YSpriteSheetManager::NONE)
+        {
+            success &= false;
+        }
+    }
+    
+    return success == true ? YSpriteSheetManager::NONE : YSpriteSheetManager::LOADING_ERROR;
+}
+
 int main(int argc, char* argv[])
-{	
+{
 	/** creates window **/
     YMain* game = new YMain("Penguins - sergiosvieira@gmail.com",
                             640,
@@ -19,27 +54,9 @@ int main(int argc, char* argv[])
     
 	/** loads resources **/
 	YSpriteSheetManager* spriteManager = new YSpriteSheetManager(game->renderer());
-	YSpriteSheetManager::kError error = spriteManager->add("background", 
-														   "C:\\Users\\sergiosvieira\\Documents\\Projects\\yda\\win-build\\samples\\penguins\\Debug\\scenario.png");
-
-	if (error != YSpriteSheetManager::NONE)
-	{
-		return 1;
-	}
-					   
-	error = spriteManager->add("penguin",
-							  "C:\\Users\\sergiosvieira\\Documents\\Projects\\yda\\win-build\\samples\\penguins\\Debug\\penguin.png");
-
-	if (error != YSpriteSheetManager::NONE)
-	{
-		return 1;
-	}
-
+    loadResources(spriteManager);
 
 	/** creates penguin **/
-	bool right = true;
-	int speed = 2;
-
 	Penguin* penguin = new Penguin(spriteManager->findByName("penguin"),
 								   160.0,
 								   -10.0,
@@ -91,10 +108,12 @@ int main(int argc, char* argv[])
 					   spriteManager->findByName("background"),
 					   NULL,
 					   NULL);
+        SDL_Rect nextFrameRect = penguin->nextFrame();
+        SDL_Rect dstRect = penguin->rect(4);
 		SDL_RenderCopy(a_renderer,
 					   penguin->texture(),
-					   &penguin->nextFrame(),
-					   &penguin->rect(4));
+					   &nextFrameRect,
+					   &dstRect);
     };
     
     game->start(&update,
