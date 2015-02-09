@@ -24,6 +24,8 @@ public:
 	SDL_Texture* texture();
 	float x();
 	float y();
+	void x(float a_x);
+	void y(float a_y);
 	int width();
 	int height();
 	SDL_Rect rect();

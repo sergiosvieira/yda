@@ -44,8 +44,8 @@ YMain::~YMain()
 	SDL_Quit();
 }
 
-void YMain::start(std::function<void()>* a_update,
-                  std::function<void(SDL_Renderer*)>* a_render,
+void YMain::start(FunctionUpdate* a_update,
+                  FunctionRender* a_render,
                   int a_maxFrameRate,
                   int a_skipFrames)
 {
@@ -73,7 +73,7 @@ void YMain::start(std::function<void()>* a_update,
               && loops < a_skipFrames)
         {
             /** update game **/
-            (*a_update)();
+            (*a_update)(&event);
             next_game_tick += SKIP_TICKS;
             loops++;
         }

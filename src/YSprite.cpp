@@ -45,6 +45,17 @@ float YSprite::y()
 	return m_y;
 }
 
+void YSprite::x(float a_x)
+{
+	m_x = a_x;
+}
+
+void YSprite::y(float a_y)
+{
+	m_y = a_y;
+}
+
+
 int YSprite::width()
 {
 	return m_width;
