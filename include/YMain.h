@@ -25,6 +25,7 @@ public:
                std::function<void(SDL_Renderer*)>* a_render,
                int a_maxFrameRate,
                int a_skipFrames);
+	SDL_Renderer* renderer();
 protected:
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;

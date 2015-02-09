@@ -87,3 +87,8 @@ void YMain::start(std::function<void()>* a_update,
         SDL_RenderPresent(m_renderer);
     }
 }
+
+SDL_Renderer* YMain::renderer()
+{
+	return m_renderer;
+}
