@@ -17,7 +17,7 @@ include_directories(${SDL2_INCLUDE_DIR})
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 
 link_libraries (
-   ${SDL_LIBRARY}
+   ${SDL2_LIBRARY}
    ${SDLIMAGE_LIBRARY}
 )
 
