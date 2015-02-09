@@ -18,7 +18,6 @@ include_directories(${SDLIMAGE_INCLUDE_DIR})
 link_libraries (
    ${SDL_LIBRARY}
    ${SDLIMAGE_LIBRARY}
-   SDLmain # Sadly not included in SDL_LIBRARY variable
 )
 
-subdirs(src)
+subdirs(src samples)
