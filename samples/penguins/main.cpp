@@ -6,9 +6,11 @@
 
 /** Penguin **/
 #include "Penguin.h"
+#include "Fish.h"
 
 /** C++ **/
 #include <functional>
+#include <vector>
 #undef main
 
 YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
@@ -54,7 +56,13 @@ int main(int argc, char* argv[])
     
 	/** loads resources **/
 	YSpriteSheetManager* spriteManager = new YSpriteSheetManager(game->renderer());
-    loadResources(spriteManager);
+
+    if (loadResources(spriteManager) != YSpriteSheetManager::NONE)
+    {
+    	printf("Error on loading resources!\n");
+    	
+    	return 1;
+    }
 
 	/** creates penguin **/
 	Penguin* penguin = new Penguin(spriteManager->findByName("penguin"),
@@ -64,13 +72,29 @@ int main(int argc, char* argv[])
 	penguin->firstFrame(0);
 	penguin->lastFrame(3);
 
+    /** creates fishes **/
+    std::vector<Fish*> fishes;
+    
+    for (int i = 0; i < 5; ++i)
+    {
+        Fish *fish = new Fish(spriteManager->findByName("fish"),
+                              100.0,
+                              100.0,
+                              YFrame(0, 0, 2, 10, 10, 5));
+        
+        if (fish != NULL)
+        {
+        	fish->pause(false);
+            fishes.push_back(fish);
+        }
+    }
+    
 	float gravity = 15.0;
 	float ground = 410;
 	bool falling = true;
 
     YMain::FunctionUpdate update = [&](SDL_Event* a_event)
-    {	
-
+    {
 		if (falling == true)
 		{
 			if (penguin->y() + gravity < ground)
@@ -108,12 +132,27 @@ int main(int argc, char* argv[])
 					   spriteManager->findByName("background"),
 					   NULL,
 					   NULL);
+        
+        /** draw penguin **/
         SDL_Rect nextFrameRect = penguin->nextFrame();
         SDL_Rect dstRect = penguin->rect(4);
-		SDL_RenderCopy(a_renderer,
-					   penguin->texture(),
-					   &nextFrameRect,
-					   &dstRect);
+        SDL_RenderCopy(a_renderer,
+                       penguin->texture(),
+                       &nextFrameRect,
+                       &dstRect);
+
+        /** draw fish **/
+        Fish* fish = fishes.at(0);
+        
+        if (fish != NULL)
+        {
+            SDL_Rect nextFishFrameRect = fish->nextFrame();
+            SDL_Rect dstFishRect = fish->rect(4);
+            SDL_RenderCopy(a_renderer,
+                           fish->texture(),
+                           &nextFishFrameRect,
+                           &dstFishRect);
+        }
     };
     
     game->start(&update,
@@ -121,6 +160,14 @@ int main(int argc, char* argv[])
                 25,
                 5);
     
+    /** dealloc resources **/
+    for (Fish* fish: fishes)
+    {
+        if (fish != NULL)
+        {
+            delete fish;
+        }
+    }
     
     delete game;
     
