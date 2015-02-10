@@ -45,14 +45,17 @@ SDL_Rect YAnimatedSprite::nextFrame()
 	return result;
 }
 
-SDL_Rect YAnimatedSprite::rect(int a_size)
+SDL_Rect YAnimatedSprite::rect(float a_size)
 {
-	SDL_Rect result;
+	SDL_Rect result = {};
 
-	result.x = m_x;
-	result.y = m_y;
-	result.w = m_frame.width * a_size;
-	result.h = m_frame.height * a_size;
+	if (m_visible == true)
+	{
+		result.x = m_x;
+		result.y = m_y;
+		result.w = m_frame.width * a_size;
+		result.h = m_frame.height * a_size;
+	}
 
 	return result;
 }

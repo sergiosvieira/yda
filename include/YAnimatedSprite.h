@@ -16,7 +16,7 @@ public:
 					float a_y,
 					YFrame a_frame);
 	SDL_Rect nextFrame();
-	SDL_Rect rect(int a_size = 1);
+	SDL_Rect rect(float a_size = 1.0);
 	void pause(bool a_value);
 	void currentFrame(int a_frame);
 	void firstFrame(int a_frame);

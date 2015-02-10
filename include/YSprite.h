@@ -26,6 +26,8 @@ public:
 	float y();
 	void x(float a_x);
 	void y(float a_y);
+	void visible(bool a_value);
+	bool isVisible();
 	int width();
 	int height();
 	SDL_Rect rect();
@@ -35,6 +37,7 @@ protected:
 	int m_width;
 	int m_height;
 	SDL_Texture* m_texture;
+	bool m_visible;
 };
 
 #endif /** __YSPRITE __ **/

@@ -17,6 +17,7 @@ YSprite::YSprite(SDL_Texture* a_texture,
 					 NULL, 
 					 &m_width, 
 					 &m_height);
+	m_visible = true;
 }
 
 YSprite::YSprite(SDL_Texture* a_texture,
@@ -55,6 +56,15 @@ void YSprite::y(float a_y)
 	m_y = a_y;
 }
 
+void YSprite::visible(bool a_value)
+{
+	m_visible = a_value;
+}
+
+bool YSprite::isVisible()
+{
+	return m_visible;
+}
 
 int YSprite::width()
 {
@@ -68,12 +78,15 @@ int YSprite::height()
 
 SDL_Rect YSprite::rect()
 {
-	SDL_Rect result;
+	SDL_Rect result = {};
 
-	result.x = m_x;
-	result.y = m_y;
-	result.w = m_width;
-	result.h = m_height;
+	if (m_visible == true)
+	{
+		result.x = m_x;
+		result.y = m_y;
+		result.w = m_width;
+		result.h = m_height;
+	}
 
 	return result;
 }
