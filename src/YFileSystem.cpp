@@ -8,6 +8,8 @@
 
 #include <stdio.h>  /* defines FILENAME_MAX */
 
+#define WINDOWS
+
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -18,8 +20,6 @@
 
 std::string YFileSystem::getCurrentDir(Error* a_error)
 {
-
-    
     char cCurrentPath[FILENAME_MAX];
 
 	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
