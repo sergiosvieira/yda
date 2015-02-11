@@ -1,7 +1,16 @@
 #include "YPoint.h"
 
-void YPoint::addVector(YVector& a_vector)
+YPoint YPoint::operator+(YVector& a_vector) const
 {
-	m_x += a_vector.x();
-	m_y += a_vector.y();
+	return YPoint(m_x + a_vector.x(), m_y + a_vector.y());
+}
+
+float YPoint::x() const
+{
+	return m_x;
+}
+
+float YPoint::y() const
+{
+	return m_y;
 }

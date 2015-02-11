@@ -8,12 +8,14 @@
 /** SDL2 **/
 #include "SDL.h"
 
+/** YDA **/
+#include "YPoint.h"
+
 class YAnimatedSprite : public YSprite
 {
 public:
 	YAnimatedSprite(SDL_Texture* a_texture,
-					float a_x,
-					float a_y,
+					YPoint a_point,
 					YFrame a_frame);
 	SDL_Rect nextFrame();
 	SDL_Rect rect(float a_size = 1.0);

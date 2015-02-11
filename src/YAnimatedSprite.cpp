@@ -1,12 +1,10 @@
 #include "YAnimatedSprite.h"
 
 YAnimatedSprite::YAnimatedSprite(SDL_Texture* a_texture,
-								 float a_x,
-								 float a_y,
+								 YPoint a_point,
 								 YFrame a_frame): 
 								 YSprite(a_texture,
-										 a_x,
-										 a_y)
+										 a_point)
 									
 {
 	m_frame = a_frame;
@@ -51,8 +49,8 @@ SDL_Rect YAnimatedSprite::rect(float a_size)
 
 	if (m_visible == true)
 	{
-		result.x = m_x;
-		result.y = m_y;
+		result.x = m_position.x();
+		result.y = m_position.y();
 		result.w = m_frame.width * a_size;
 		result.h = m_frame.height * a_size;
 	}

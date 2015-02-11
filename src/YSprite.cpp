@@ -3,14 +3,13 @@
 /** C++ **/
 #include <cassert>
 
+
 YSprite::YSprite(SDL_Texture* a_texture,
-				 float a_x,
-				 float a_y)
+				 YPoint a_point)
 {
 	m_texture = a_texture;
-	m_x = a_x;
-	m_y = a_y;
-	
+	m_position = a_point;
+
 	/** getting texture width and height **/
 	SDL_QueryTexture(a_texture, 
 					 NULL, 
@@ -20,40 +19,19 @@ YSprite::YSprite(SDL_Texture* a_texture,
 	m_visible = true;
 }
 
-YSprite::YSprite(SDL_Texture* a_texture,
-				 float a_x,
-				 float a_y,
-				 int a_width,
-				 int a_height)
-{
-	m_texture = a_texture;
-	m_x = a_x;
-	m_y = a_y;
-}
-
 SDL_Texture* YSprite::texture()
 {
 	return m_texture;
 }
 
-float YSprite::x()
+YPoint YSprite::position()
 {
-	return m_x;
+	return m_position;
 }
 
-float YSprite::y()
+void YSprite::position(YPoint a_point)
 {
-	return m_y;
-}
-
-void YSprite::x(float a_x)
-{
-	m_x = a_x;
-}
-
-void YSprite::y(float a_y)
-{
-	m_y = a_y;
+	m_position = a_point;
 }
 
 void YSprite::visible(bool a_value)
@@ -82,8 +60,8 @@ SDL_Rect YSprite::rect()
 
 	if (m_visible == true)
 	{
-		result.x = m_x;
-		result.y = m_y;
+		result.x = m_position.x();
+		result.y = m_position.y();
 		result.w = m_width;
 		result.h = m_height;
 	}

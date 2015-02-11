@@ -5,15 +5,14 @@
 
 YVector YVector::operator+(const YVector& a_vector) const
 {
-	return YVector(m_x + a_vector.x(),
-				   m_y + a_vector.y())
+	return YVector(m_x + a_vector.m_x, 
+				   m_y + a_vector.m_y);
 }
 
 YVector YVector::operator-(const YVector& a_vector) const
 {
-    YVector result = YVector(m_x - a_vector.x(),
-                             m_y - a_vector.y());
-	return result;
+	return YVector(m_x - a_vector.m_x, 
+				   m_y - a_vector.m_y);
 }
 
 YVector YVector::operator*(float a_value) const

@@ -6,34 +6,26 @@
 
 /** SDL2 **/
 #include <SDL.h>
-//#include <SDL2_image/SDL_image.h>
 #include <SDL_image.h>
 
+/** YDA **/
+#include "YPoint.h"
 
 class YSprite
 {
 public:
 	YSprite(SDL_Texture* a_texture,
-			float a_x, 
-			float a_y);
-	YSprite(SDL_Texture* a_texture,
-			float a_x, 
-			float a_y,
-			int a_width,
-			int a_height);
+			YPoint a_position);
 	SDL_Texture* texture();
-	float x();
-	float y();
-	void x(float a_x);
-	void y(float a_y);
+	YPoint position();
+	void position(YPoint a_position);
 	void visible(bool a_value);
 	bool isVisible();
 	int width();
 	int height();
 	SDL_Rect rect();
 protected:
-	float m_x;
-	float m_y;
+	YPoint m_position;
 	int m_width;
 	int m_height;
 	SDL_Texture* m_texture;
