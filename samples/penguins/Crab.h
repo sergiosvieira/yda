@@ -16,7 +16,8 @@ public:
 		 float a_x,
 		 float a_y,
 		 YFrame a_frame,
-		 int a_seaY): 
+		 int a_seaY,
+         SDL_Texture* m_scumaTexture):
 		 YAnimatedSprite(
 		 	a_texture,
 		 	a_x,
@@ -30,7 +31,18 @@ public:
 			m_onSea = true;
 			m_seaY = a_seaY;
 			m_oldHeight = m_frame.height;
+            
+            m_scuma = new YAnimatedSprite(m_scumaTexture,
+                                          a_x,
+                                          a_y,
+                                          YFrame(0, 0, 2, 10, 10, 15));
+            m_scuma->pause(false);
+            m_scuma->visible(false);
 		};
+    YAnimatedSprite* scuma()
+    {
+        return m_scuma;
+    };
 	void start(SDL_Rect a_islandRect);
 	void jump();
 	void update();
@@ -43,6 +55,7 @@ private:
 	State m_state;
 	SDL_Rect m_islandRect;
 	float m_oldHeight;
+    YAnimatedSprite* m_scuma;
 };
 
 #endif /** __CRAB__ **/

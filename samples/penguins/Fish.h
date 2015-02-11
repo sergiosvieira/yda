@@ -16,6 +16,7 @@ public:
 		 	a_x,
 		 	a_y,
 		 	a_frame){};
+    void update();
 };
 
 #endif /** __FISH __ **/

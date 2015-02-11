@@ -29,6 +29,7 @@ YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
 		{"fish_green", "fish_green.png"},
 		{"fish_red", "fish_red.png"},
 		{"crab_pink", "crab_pink.png"},
+        {"scuma", "scuma.png"}
     };
     
     int size = sizeof(sprites) / sizeof(Sprite);
@@ -38,12 +39,14 @@ YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
     for (int i = 0; i < size; ++i)
     {
         std::string key = sprites[i].key;
-        std::string value = YFileSystem::getCurrentDir() + "\\" + sprites[i].value;
+        std::string value = YFileSystem::getCurrentDir() + "/" + sprites[i].value;
         
         result = a_manager->add(key, value);
 
         if (result != YSpriteSheetManager::NONE)
         {
+            printf("Error on loading %s\n",
+                   value.c_str());
             success &= false;
         }
     }
@@ -99,17 +102,19 @@ int main(int argc, char* argv[])
 	float ground = 410;
 	SDL_Rect islandRect;
 
-	islandRect.x = 100;
+	islandRect.x = 150;
 	islandRect.y = ground;
-	islandRect.w = 270;
+	islandRect.w = 230;
 	islandRect.h = 70;
 
 	/** creates crab **/
+    SDL_Texture* scuma = spriteManager->findByName("scuma");
 	Crab* crab = new Crab(spriteManager->findByName("crab_pink"),
 						  50.0,
 						  ground,
 						  YFrame(0, 0, 2, 10, 11, 8),
-						  ground);
+						  ground,
+                          scuma);
 	crab->pause(false);
 	crab->visible(false);
 
@@ -183,6 +188,12 @@ int main(int argc, char* argv[])
         dstRect = crab->rect(3);
         SDL_RenderCopy(a_renderer,
                        crab->texture(),
+                       &nextFrameRect,
+                       &dstRect);
+        nextFrameRect = crab->scuma()->nextFrame();
+        dstRect = crab->scuma()->rect(3);
+        SDL_RenderCopy(a_renderer,
+                       scuma,
                        &nextFrameRect,
                        &dstRect);
     };

@@ -8,8 +8,6 @@
 
 #include <stdio.h>  /* defines FILENAME_MAX */
 
-#define WINDOWS
-
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd

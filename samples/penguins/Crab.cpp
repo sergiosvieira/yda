@@ -17,6 +17,7 @@ void Crab::jump()
 	}
 }
 
+
 void Crab::update()
 {
 	if (m_visible)
@@ -24,9 +25,10 @@ void Crab::update()
 		bool swimming = false;
 		float offset = 15.0;
 
-		if (m_x > m_islandRect.x &&
-			m_x < m_islandRect.x + m_islandRect.w)
-		{
+        if (m_x < m_islandRect.x + m_islandRect.w &&
+            m_x + m_frame.width > m_islandRect.x)
+        {
+            m_scuma->visible(false);
 			if (m_state == JUMP_TO_ISLAND)
 			{
 				this->jump();
@@ -60,10 +62,19 @@ void Crab::update()
 			m_jumping = false;
 		}
 
-		if (m_x < 16.0 
-			|| m_x > 640 - 16)
+        if (swimming)
+        {
+            m_scuma->visible(true);
+        }
+        
+		if (m_x < 5.0
+			|| m_x > 620 - 16)
 		{
 			m_velocityX *= -1.0;
 		}
+        
+        m_scuma->x(m_x);
+        m_scuma->y(m_y + 10.0);
+        
 	}
 }
