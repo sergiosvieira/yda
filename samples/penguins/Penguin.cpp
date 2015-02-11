@@ -1,27 +1,20 @@
 #include "Penguin.h"
 
 
-void Penguin::moveBy(float a_x,
-					 float a_y)
-{
-	m_x += a_x;
-	m_y += a_y;
-}
-
 void Penguin::startJump()
 {
 	if (m_onGround == true)
 	{
-		m_velocityY = -12.f;
+		m_velocity = YVector(0.f, -12.f);
 		m_onGround = false;
 	}
 }
 
 void Penguin::endJump()
 {
-    if (m_velocityY < -6.0)
+    if (m_velocity.y() < -6.0)
 	{
-        m_velocityY = -6.0;
+		m_velocity = YVector(0.f, -6.f);
 	}
 }
 
@@ -32,24 +25,23 @@ void Penguin::onGround(bool a_value)
 
 void Penguin::update()
 {
-	float gravity = 0.8;
-
-	m_velocityY += gravity;
-    m_y += m_velocityY;
-    m_x += m_velocityX;
+	m_velocity = m_velocity + m_gravity;
+	m_position = m_position + m_velocity;
     
-    if (m_y > 410.f)
+    if (m_position.y() > 410.f)
     {
-        m_y = 410;
-        m_velocityY = 0.0;
+		m_position = YPoint(m_position.x(), 410.f);
+        m_velocity = YVector(0.f, 0.f);
         m_onGround = true;
     }    
 
-    if (m_x < 150.f || m_x > 350.f)
+    if (m_position.x() < 150.f || 
+		m_position.y() > 350.f)
 	{
-        m_velocityX *= -1.f;
+		/** invert vector **/
+		m_velocity = YVector(0, 0) - m_velocity;
 
-		if (m_velocityX > 0.f)
+		if (m_velocity.x()> 0.f)
 		{
 			this->currentFrame(0);
 			this->firstFrame(0);

@@ -8,13 +8,11 @@ class Fish : public YAnimatedSprite
 {
 public:
 	Fish(SDL_Texture* a_texture,
-		 float a_x,
-		 float a_y,
+		 YPoint a_point,
 		 YFrame a_frame): 
 		 YAnimatedSprite(
 		 	a_texture,
-		 	a_x,
-		 	a_y,
+		 	a_point,
 		 	a_frame){};
     void update();
 };

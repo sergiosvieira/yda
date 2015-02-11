@@ -2,6 +2,8 @@
 
 /** YDA **/
 #include "YSpriteSheetManager.h"
+#include "YPoint.h"
+#include "YVector.h"
 #include "YFileSystem.h"
 
 /** Penguin **/
@@ -39,7 +41,7 @@ YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
     for (int i = 0; i < size; ++i)
     {
         std::string key = sprites[i].key;
-        std::string value = YFileSystem::getCurrentDir() + "/" + sprites[i].value;
+        std::string value = YFileSystem::getCurrentDir() + "\\" + sprites[i].value;
         
         result = a_manager->add(key, value);
 
@@ -73,8 +75,7 @@ int main(int argc, char* argv[])
 
 	/** creates penguin **/
 	Penguin* penguin = new Penguin(spriteManager->findByName("penguin"),
-								   160.0,
-								   -10.0,
+								   YPoint(160.f, -10.f),
 								   YFrame(0, 0, 8, 10, 10, 5));
 	penguin->firstFrame(0);
 	penguin->lastFrame(3);
@@ -87,9 +88,8 @@ int main(int argc, char* argv[])
 		Fish *fish = NULL;
 
 		fish = new Fish(spriteManager->findByName("fish_blue"),
-                            100.0,
-                            100.0,
-                            YFrame(0, 0, 2, 10, 10, 15));
+						YPoint(100.f, 100.f),
+                        YFrame(0, 0, 2, 10, 10, 15));
         
         if (fish != NULL)
         {
@@ -98,8 +98,8 @@ int main(int argc, char* argv[])
         }
     }
     
-	float gravity = 15.0;
-	float ground = 410;
+	YVector gravity(0, 15.0);
+	float ground = 410.f;
 	SDL_Rect islandRect;
 
 	islandRect.x = 150;
@@ -110,8 +110,7 @@ int main(int argc, char* argv[])
 	/** creates crab **/
     SDL_Texture* scuma = spriteManager->findByName("scuma");
 	Crab* crab = new Crab(spriteManager->findByName("crab_pink"),
-						  50.0,
-						  ground,
+						  YPoint(50.f, ground),
 						  YFrame(0, 0, 2, 10, 11, 8),
 						  ground,
                           scuma);
@@ -124,15 +123,19 @@ int main(int argc, char* argv[])
     {
 		if (falling == true)
 		{
-			if (penguin->y() + gravity < ground)
-			{
-				penguin->moveBy(0.0, 15.0); // 15 pixels x framerate
+			YPoint position = penguin->position() + gravity;
+
+			if (position.y() < ground)
+			{				
+				penguin->position(position);
 				penguin->currentFrame(8);
 				penguin->pause(true);
 			}
 			else
 			{
-				penguin->y(ground);
+				YPoint position(penguin->position().x(), ground);
+
+				penguin->position(position);
 				falling = false;
 				crab->start(islandRect);
 			}
@@ -152,7 +155,7 @@ int main(int argc, char* argv[])
 
 			penguin->update();
 			crab->update();
-		}		
+		}
     };
     
     YMain::FunctionRender render = [&](SDL_Renderer* a_renderer)
