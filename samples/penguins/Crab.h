@@ -5,8 +5,8 @@
 #include "YAnimatedSprite.h"
 
 /** YDA **/
-#include "YPoint.h";
-#include "YVector.h";
+#include "YPoint.h"
+#include "YVector.h"
 
 
 class Crab : public YAnimatedSprite
