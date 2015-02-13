@@ -33,7 +33,7 @@ public:
 	/*!
 	  \return a new YPoint
 	*/
-	YPoint operator+(YVector& a_vector) const;
+	YPoint add(YVector& a_vector) const;
 protected:
 	float m_x; //! x component of the point
 	float m_y; //! y component of the pont
