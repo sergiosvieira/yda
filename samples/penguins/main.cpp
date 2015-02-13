@@ -38,10 +38,17 @@ YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
     bool success = true;
     YSpriteSheetManager::kError result;
     
+    std::string kSeparator =
+#ifdef _WIN32
+    "\\";
+#else
+    "/";
+#endif
+    
     for (int i = 0; i < size; ++i)
     {
         std::string key = sprites[i].key;
-        std::string value = YFileSystem::getCurrentDir() + "\\" + sprites[i].value;
+        std::string value = YFileSystem::getCurrentDir() + kSeparator + sprites[i].value;
         
         result = a_manager->add(key, value);
 
@@ -123,7 +130,7 @@ int main(int argc, char* argv[])
     {
 		if (falling == true)
 		{
-			YPoint position = penguin->position() + gravity;
+			YPoint position = penguin->position().add(gravity);
 
 			if (position.y() < ground)
 			{				
@@ -136,8 +143,8 @@ int main(int argc, char* argv[])
 				YPoint position(penguin->position().x(), ground);
 
 				penguin->position(position);
-				falling = false;
 				crab->start(islandRect);
+				falling = false;
 			}
 		}
 		else
