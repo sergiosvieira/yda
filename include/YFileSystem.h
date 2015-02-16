@@ -13,6 +13,7 @@ public:
 		GET_CURRENT_DIR_ERROR
 	} Error;
 	static std::string getCurrentDir(Error* a_error = NULL);
+    static const char* kSeparator;
 };
 
 #endif /** __YFILE_SYSTEM__ **/

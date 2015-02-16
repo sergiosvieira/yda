@@ -8,12 +8,19 @@
 
 #include <stdio.h>  /* defines FILENAME_MAX */
 
-#ifdef WINDOWS
+#ifdef _WIN32
 #include <direct.h>
 #define GetCurrentDir _getcwd
 #else
 #include <unistd.h>
 #define GetCurrentDir getcwd
+#endif
+
+const char* YFileSystem::kSeparator =
+#ifdef _WIN32
+    "\\";
+#else
+    "/";
 #endif
 
 std::string YFileSystem::getCurrentDir(Error* a_error)
