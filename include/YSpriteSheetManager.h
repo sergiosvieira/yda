@@ -18,18 +18,21 @@ public:
 		LOADING_ERROR,
 		CREATING_TEXTURE_ERROR,
 		TEXTURE_NOT_FOUND
-	} kError;
+	} Error;
 	YSpriteSheetManager(SDL_Renderer* a_renderer);
 	~YSpriteSheetManager();
-	kError add(std::string a_key,
+	Error add(std::string a_key,
 			   std::string a_filename);
-	kError remove(std::string a_key);
+	Error remove(std::string a_key);
 	SDL_Texture* findByName(std::string a_key);
+	static SDL_Texture* loadTexture(SDL_Renderer* a_renderer,
+									const char* a_filename,
+									Error* a_error = NULL);
 private:
 	typedef std::map<std::string, SDL_Texture*> TextureMap;
 	TextureMap m_textures;
 	SDL_Renderer* m_renderer;
-	bool m_loaded;
+    static bool m_initialized;
 };
 
 #endif /** __YSPRITE_SHEET_MANAGER__ **/

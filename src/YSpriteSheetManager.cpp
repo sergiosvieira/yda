@@ -3,12 +3,19 @@
 /** C++ **/
 #include <cassert>
 
+/** Initializing constants **/
+bool YSpriteSheetManager::m_initialized = false;
 
 YSpriteSheetManager::YSpriteSheetManager(SDL_Renderer* a_renderer)
 {
 	assert(a_renderer != NULL);
 
-	IMG_Init(IMG_INIT_PNG);
+    if (YSpriteSheetManager::m_initialized == false)
+    {
+        IMG_Init(IMG_INIT_PNG);
+        YSpriteSheetManager::m_initialized = true;
+    }
+    
 	m_renderer = a_renderer ;
 }
 
@@ -26,49 +33,40 @@ YSpriteSheetManager::~YSpriteSheetManager()
 		}
 	}
 
-	IMG_Quit();
+    if (YSpriteSheetManager::m_initialized == true)
+    {
+        IMG_Quit();
+    }
 }
 
-YSpriteSheetManager::kError YSpriteSheetManager::add(std::string a_key,
+YSpriteSheetManager::Error YSpriteSheetManager::add(std::string a_key,
 												   	 std::string a_filename)
 {
 	assert(a_key.size() > 0);
 	assert(a_key.size() > 0);
 
-	kError result = NONE;
+	Error error = NONE;
 
 	TextureMap::iterator it = m_textures.find(a_key);
 
 	if (it == m_textures.end())
 	{
-		SDL_Surface* surface = IMG_Load(a_filename.c_str());
+        SDL_Texture* texture = YSpriteSheetManager::loadTexture(m_renderer,
+                                                                a_filename.c_str(),
+                                                                &error);
+        
+        if (texture != NULL)
+        {
+            m_textures[a_key] = texture;
+        }
+    }
 
-		if (surface == NULL)
-		{
-			result = LOADING_ERROR;			
-		}
-		else
-		{
-			SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer,
-																surface);
-
-			if (texture == NULL)
-			{
-				result = CREATING_TEXTURE_ERROR;
-			}
-			else
-			{
-				m_textures[a_key] = texture;
-			}
-		}
-	}
-
-	return result;
+	return error;
 }
 
-YSpriteSheetManager::kError YSpriteSheetManager::remove(std::string a_key)
+YSpriteSheetManager::Error YSpriteSheetManager::remove(std::string a_key)
 {
-	kError result = NONE;
+	Error result = NONE;
 	TextureMap::iterator it = m_textures.find(a_key);
 
 	if (it != m_textures.end())
@@ -89,7 +87,6 @@ YSpriteSheetManager::kError YSpriteSheetManager::remove(std::string a_key)
 	return result;
 }
 
-
 SDL_Texture* YSpriteSheetManager::findByName(std::string a_key)
 {
 	SDL_Texture* result = NULL;
@@ -101,4 +98,54 @@ SDL_Texture* YSpriteSheetManager::findByName(std::string a_key)
 	}
 
 	return result;
+}
+
+SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
+                                              const char* a_filename,
+                                              Error* a_error)
+{
+    SDL_Texture* result = NULL;
+
+    if (a_renderer == NULL ||
+        a_filename == NULL)
+    {
+        if (a_error != NULL)
+        {
+            *a_error = LOADING_ERROR;
+        }
+    }
+    else
+    {
+        if (YSpriteSheetManager::m_initialized == false)
+        {
+            YSpriteSheetManager::m_initialized = true;
+            IMG_Init(IMG_INIT_PNG);
+        }
+        
+
+        SDL_Surface* surface = IMG_Load(a_filename);
+        
+        if (surface == NULL)
+        {
+            if (a_error != NULL)
+            {
+                *a_error = LOADING_ERROR;
+            }
+        }
+        else
+        {
+            result = SDL_CreateTextureFromSurface(a_renderer,
+                                                  surface);
+            
+            if (result == NULL)
+            {
+                if (a_error != NULL)
+                {
+                    *a_error = CREATING_TEXTURE_ERROR;
+                }
+            }
+        }
+    }
+    
+    return result;
 }
