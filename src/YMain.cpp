@@ -6,7 +6,7 @@
 YMain::YMain(const char* a_title,
 		  	 int a_width,
 		  	 int a_height,
-		  	 kError* a_error)
+		  	 Error* a_error)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	m_window = SDL_CreateWindow(a_title,
@@ -73,7 +73,7 @@ void YMain::start(FunctionUpdate* a_update,
               && loops < a_skipFrames)
         {
             /** update game **/
-            (*a_update)(&event);
+            (*a_update)(&event, interpolation);
             next_game_tick += SKIP_TICKS;
             loops++;
         }

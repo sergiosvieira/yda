@@ -15,13 +15,13 @@ public:
 		NONE,
 		CREATING_ERROR,
 		RENDERING_ERROR
-	} kError;
-	typedef std::function<void(SDL_Event*)> FunctionUpdate;
+	} Error;
+	typedef std::function<void(SDL_Event*, float)> FunctionUpdate;
 	typedef std::function<void(SDL_Renderer*)> FunctionRender;
 	YMain(const char* a_title,
 		  int a_width,
 		  int a_height,
-		  kError* a_error = NULL);
+		  Error* a_error = NULL);
 	~YMain();
 	void start(FunctionUpdate* a_update,
                FunctionRender* a_render,
