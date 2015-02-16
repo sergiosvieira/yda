@@ -8,15 +8,24 @@
 class YVector
 {
 public:
-	//! Vector constructor with arguments
+    //! Vector constructor two with arguments
+    YVector(float a_x,
+            float a_y):
+    m_x(a_x),
+    m_y(a_y),
+    m_z(0.f){};
+	//! Vector constructor three with arguments
 	YVector(float a_x,
-		    float a_y):
+		    float a_y,
+            float a_z):
 			m_x(a_x),
-			m_y(a_y){};
+			m_y(a_y),
+            m_z(a_z){};
 	//! Vector constructor without arguments
 	YVector():
 			m_x(0.f),
-			m_y(0.f){};
+			m_y(0.f),
+            m_z(0.f){};
 	//! Vector: + operator override
 	YVector operator+(const YVector& a_vector) const;
 	//! Vector: - operator override
@@ -39,14 +48,19 @@ public:
 	/*!
 	  \return the x component of the vector
 	*/
-	float x();
+	float x() const;
 	/*!
 	  \return the y component of the vector
 	*/
-	float y();
+	float y() const;
+    /*!
+      \return the z component of the vector
+    */
+    float z() const;
 protected:
-	float m_x; /*! x component of the vector */
-	float m_y; /*! y component of the vector */
+	float m_x; //! x component of the vector
+	float m_y; //! y component of the vector
+    float m_z; //! z component of the vector
 };
 
 #endif /** __YVECTOR__ **/
