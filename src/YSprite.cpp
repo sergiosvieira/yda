@@ -14,8 +14,8 @@ YSprite::YSprite(SDL_Texture* a_texture)
 
 	/** getting texture width and height **/
 	SDL_QueryTexture(a_texture, 
-					 NULL, 
-					 NULL, 
+					 nullptr,
+					 nullptr,
 					 &m_width, 
 					 &m_height);
 }

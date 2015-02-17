@@ -76,8 +76,8 @@ int main(int argc, char** argv)
     {
         SDL_RenderCopy(a_renderer,
                        background,
-                       NULL,
-                       NULL);
+                       nullptr,
+                       nullptr);
         box->render(a_renderer,
                     boxSprite);
     };

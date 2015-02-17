@@ -29,7 +29,7 @@ std::string YFileSystem::getCurrentDir(Error* a_error)
 
 	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
     {
-    	if (a_error != NULL)
+    	if (a_error != nullptr)
     	{
     		*a_error = GET_CURRENT_DIR_ERROR;
     	}

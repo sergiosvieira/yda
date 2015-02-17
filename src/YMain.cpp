@@ -15,9 +15,9 @@ YMain::YMain(const char* a_title,
 								a_width,
 								a_height, 
 								0);
-	if (m_window == NULL)
+	if (m_window == nullptr)
 	{
-		if (a_error != NULL)
+		if (a_error != nullptr)
 		{
 			*a_error = CREATING_ERROR;
 		}
@@ -28,9 +28,9 @@ YMain::YMain(const char* a_title,
 										-1,
 										0);
 
-    	if (m_renderer == NULL)
+    	if (m_renderer == nullptr)
     	{
-    		if (a_error != NULL)
+    		if (a_error != nullptr)
     		{
     			*a_error = RENDERING_ERROR;
     		}

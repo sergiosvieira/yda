@@ -3,7 +3,7 @@
 /** YDA **/
 #include "YSprite.h"
 
-Box::Box(): YGameObject(NULL,
+Box::Box(): YGameObject(nullptr,
                    YPoint(0.f, 0.f),
                    YPoint(0.f, 0.f),
                    true)

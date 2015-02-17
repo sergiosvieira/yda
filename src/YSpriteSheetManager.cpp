@@ -8,7 +8,7 @@ bool YSpriteSheetManager::m_initialized = false;
 
 YSpriteSheetManager::YSpriteSheetManager(SDL_Renderer* a_renderer)
 {
-	assert(a_renderer != NULL);
+	assert(a_renderer != nullptr);
 
     if (YSpriteSheetManager::m_initialized == false)
     {
@@ -27,7 +27,7 @@ YSpriteSheetManager::~YSpriteSheetManager()
 	{
 		SDL_Texture *texture = (*it).second;
 
-		if (texture != NULL)
+		if (texture != nullptr)
 		{
 			SDL_DestroyTexture(texture);
 		}
@@ -55,7 +55,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::add(std::string a_key,
                                                                 a_filename.c_str(),
                                                                 &error);
         
-        if (texture != NULL)
+        if (texture != nullptr)
         {
             m_textures[a_key] = texture;
         }
@@ -73,7 +73,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::remove(std::string a_key)
 	{
 		SDL_Texture* texture = (*it).second;
 
-		if (texture != NULL)
+		if (texture != nullptr)
 		{
 			SDL_DestroyTexture(texture);			
 			m_textures.erase(it);
@@ -89,7 +89,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::remove(std::string a_key)
 
 SDL_Texture* YSpriteSheetManager::findByName(std::string a_key)
 {
-	SDL_Texture* result = NULL;
+	SDL_Texture* result = nullptr;
 	TextureMap::iterator it = m_textures.find(a_key);
 
 	if (it != m_textures.end())
@@ -104,12 +104,12 @@ SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
                                               const char* a_filename,
                                               Error* a_error)
 {
-    SDL_Texture* result = NULL;
+    SDL_Texture* result = nullptr;
 
-    if (a_renderer == NULL ||
-        a_filename == NULL)
+    if (a_renderer == nullptr ||
+        a_filename == nullptr)
     {
-        if (a_error != NULL)
+        if (a_error != nullptr)
         {
             *a_error = LOADING_ERROR;
         }
@@ -125,9 +125,9 @@ SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
 
         SDL_Surface* surface = IMG_Load(a_filename);
         
-        if (surface == NULL)
+        if (surface == nullptr)
         {
-            if (a_error != NULL)
+            if (a_error != nullptr)
             {
                 *a_error = LOADING_ERROR;
             }
@@ -137,9 +137,9 @@ SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
             result = SDL_CreateTextureFromSurface(a_renderer,
                                                   surface);
             
-            if (result == NULL)
+            if (result == nullptr)
             {
-                if (a_error != NULL)
+                if (a_error != nullptr)
                 {
                     *a_error = CREATING_TEXTURE_ERROR;
                 }

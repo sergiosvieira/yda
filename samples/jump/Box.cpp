@@ -1,5 +1,8 @@
 #include "Box.h"
 
+/** C++ **/
+#include <cstddef>
+
 /** SDL2 **/
 #include <SDL.h>
 
@@ -7,7 +10,7 @@
 #include "YSprite.h"
 
 
-Box::Box(YSprite* a_sprite): YGameObject(NULL,
+Box::Box(YSprite* a_sprite): YGameObject(nullptr,
                              YPoint(0.f, 0.f),
                              YPoint(0.f, 0.f),
                              true)
