@@ -14,15 +14,31 @@ struct SDL_Rect;
 class YSprite
 {
 public:
+    //! Default constructor
+    /*!
+      \param SDL_Texture*
+    */
 	YSprite(SDL_Texture* a_texture);
+    /*!
+      \return SDL_Texture*
+    */
 	SDL_Texture* texture();
-	int width();
-	int height();
-	SDL_Rect rect();
+    /*!
+      \return int - Sprite width
+    */
+	virtual int width();
+    /*!
+      \return int - Sprite height
+    */
+	virtual int height();
+    /*!
+      \return SDL_Rect - Rect(0, 0, width, height)
+    */
+	virtual SDL_Rect rect();
 protected:
-	int m_width;
-	int m_height;
-	SDL_Texture* m_texture;
+	int m_width;//! Sprite width
+	int m_height;//! Sprite height
+	SDL_Texture* m_texture;//! Sprite texture
 };
 
 #endif /** __YSPRITE __ **/

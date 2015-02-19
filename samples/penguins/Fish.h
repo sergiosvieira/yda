@@ -3,6 +3,7 @@
 
 /** YDS **/
 #include "YAnimatedSprite.h"
+#include "YVector.h"
 
 class Fish : public YAnimatedSprite
 {
@@ -13,8 +14,16 @@ public:
 		 YAnimatedSprite(
 		 	a_texture,
 		 	a_point,
-		 	a_frame){};
+		 	a_frame)
+		 {
+		 	m_velocity = YVector(5.f, 0.f);
+		 	m_jumping = false;
+		 };
+	void jump();
     void update();
+protected:
+	YVector m_velocity;
+	bool m_jumping;
 };
 
 #endif /** __FISH __ **/

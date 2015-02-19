@@ -44,14 +44,12 @@ void Penguin::update()
 		if (m_velocity.x()> 0.f)
 		{
 			this->currentFrame(0);
-			this->firstFrame(0);
-			this->lastFrame(3);
+			this->frameRange(0, 3);
 		}
 		else
 		{
 			this->currentFrame(4);
-			this->firstFrame(4);
-			this->lastFrame(7);
+			this->frameRange(4, 7);
 		}
 	}
 }

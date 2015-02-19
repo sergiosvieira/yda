@@ -1,39 +1,39 @@
-#include "YAnimatedSprite.h"
+#include "YSpriteSheet.h"
 
 /** Public Methods **/
-SDL_Rect YAnimatedSprite::rect()
+SDL_Rect YSpriteSheet::rect()
 {
     return nextFrame();
 }
 
-void YAnimatedSprite::pause(bool a_value)
+void YSpriteSheet::pause(bool a_value)
 {
 	m_paused = a_value;
 }
 
-void YAnimatedSprite::currentFrame(int a_frame)
+void YSpriteSheet::currentFrame(int a_frame)
 {
 	m_frame.current = a_frame;
 }
 
-void YAnimatedSprite::frameRange(int a_first, int a_last)
+void YSpriteSheet::frameRange(int a_first, int a_last)
 {
     m_frame.first = a_first;
     m_frame.last = a_last;
 }
 
-int YAnimatedSprite::frameWidth()
+int YSpriteSheet::width()
 {
     return m_frameWidth;
 }
 
-int YAnimatedSprite::frameHeight()
+int YSpriteSheet::height()
 {
     return m_frameHeight;
 }
 
 /** Private Methods **/
-SDL_Rect YAnimatedSprite::nextFrame()
+SDL_Rect YSpriteSheet::nextFrame()
 {
     SDL_Rect result = {};
     

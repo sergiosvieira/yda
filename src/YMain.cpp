@@ -49,7 +49,7 @@ void YMain::start(FunctionUpdate* a_update,
                   int a_maxFrameRate,
                   int a_skipFrames)
 {
-    const int SKIP_TICKS = 1000 / a_maxFrameRate;
+    const int SKIP_TICKS = 1000.f / (float)a_maxFrameRate;
     bool quit = false;
     int loops;
     SDL_Event event;

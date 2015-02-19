@@ -1,5 +1,5 @@
-#ifndef __YANIMATED__
-#define __YANIMATED__
+#ifndef __YSPRITE_HEADER__
+#define __YSPRITE_HEADER__
 
 /*!
   Store animation frame indexes
@@ -27,4 +27,4 @@ typedef struct YFrame
 	int last; //! Last frame index		   
 } YFrame;
 
-#endif /** __YANIMATED__ **/
+#endif /** __YSPRITE_HEADER__ **/

@@ -1,25 +1,25 @@
-#include "YSpriteSheetManager.h"
+#include "YSpriteManager.h"
 
 /** C++ **/
 #include <cassert>
 
 /** Initializing constants **/
-bool YSpriteSheetManager::m_initialized = false;
+bool YSpriteManager::m_initialized = false;
 
-YSpriteSheetManager::YSpriteSheetManager(SDL_Renderer* a_renderer)
+YSpriteManager::YSpriteManager(SDL_Renderer* a_renderer)
 {
 	assert(a_renderer != nullptr);
 
-    if (YSpriteSheetManager::m_initialized == false)
+    if (YSpriteManager::m_initialized == false)
     {
         IMG_Init(IMG_INIT_PNG);
-        YSpriteSheetManager::m_initialized = true;
+        YSpriteManager::m_initialized = true;
     }
     
 	m_renderer = a_renderer ;
 }
 
-YSpriteSheetManager::~YSpriteSheetManager()
+YSpriteManager::~YSpriteManager()
 {
 	for (TextureMap::iterator it = m_textures.begin();
 		 it != m_textures.end();
@@ -33,13 +33,13 @@ YSpriteSheetManager::~YSpriteSheetManager()
 		}
 	}
 
-    if (YSpriteSheetManager::m_initialized == true)
+    if (YSpriteManager::m_initialized == true)
     {
         IMG_Quit();
     }
 }
 
-YSpriteSheetManager::Error YSpriteSheetManager::add(std::string a_key,
+YSpriteManager::Error YSpriteManager::add(std::string a_key,
 												   	 std::string a_filename)
 {
 	assert(a_key.size() > 0);
@@ -51,7 +51,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::add(std::string a_key,
 
 	if (it == m_textures.end())
 	{
-        SDL_Texture* texture = YSpriteSheetManager::loadTexture(m_renderer,
+        SDL_Texture* texture = YSpriteManager::loadTexture(m_renderer,
                                                                 a_filename.c_str(),
                                                                 &error);
         
@@ -64,7 +64,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::add(std::string a_key,
 	return error;
 }
 
-YSpriteSheetManager::Error YSpriteSheetManager::remove(std::string a_key)
+YSpriteManager::Error YSpriteManager::remove(std::string a_key)
 {
 	Error result = NONE;
 	TextureMap::iterator it = m_textures.find(a_key);
@@ -87,7 +87,7 @@ YSpriteSheetManager::Error YSpriteSheetManager::remove(std::string a_key)
 	return result;
 }
 
-SDL_Texture* YSpriteSheetManager::findByName(std::string a_key)
+SDL_Texture* YSpriteManager::findByName(std::string a_key)
 {
 	SDL_Texture* result = nullptr;
 	TextureMap::iterator it = m_textures.find(a_key);
@@ -100,7 +100,7 @@ SDL_Texture* YSpriteSheetManager::findByName(std::string a_key)
 	return result;
 }
 
-SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
+SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer* a_renderer,
                                               const char* a_filename,
                                               Error* a_error)
 {
@@ -116,9 +116,9 @@ SDL_Texture* YSpriteSheetManager::loadTexture(SDL_Renderer* a_renderer,
     }
     else
     {
-        if (YSpriteSheetManager::m_initialized == false)
+        if (YSpriteManager::m_initialized == false)
         {
-            YSpriteSheetManager::m_initialized = true;
+            YSpriteManager::m_initialized = true;
             IMG_Init(IMG_INIT_PNG);
         }
         

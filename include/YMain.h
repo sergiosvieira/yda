@@ -21,7 +21,7 @@ public:
 	YMain(const char* a_title,
 		  int a_width,
 		  int a_height,
-		  Error* a_error = NULL);
+		  Error* a_error = nullptr);
 	~YMain();
 	void start(FunctionUpdate* a_update,
                FunctionRender* a_render,

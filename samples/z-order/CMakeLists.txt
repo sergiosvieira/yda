@@ -1,0 +1,6 @@
+subdirs(gfx)
+include_directories(${yda_SOURCE_DIR}/include)
+link_directories(${yda_SOURCE_DIR}/src)
+file(GLOB SOURCES "*.cpp")
+add_executable(Z-Order ${SOURCES})
+target_link_libraries(Z-Order yda)

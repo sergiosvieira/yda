@@ -42,6 +42,21 @@ public:
      \return z component of the point
      */
     float z() const;
+    //! Setting x component
+    /*!
+      \param float
+    */
+    void x(float x);
+    //! Setting x component
+    /*!
+     \param float
+     */
+    void y(float x);
+    //! Setting x component
+    /*!
+     \param float
+     */
+    void z(float x);
 	//! Creates a new point added to a vector using operator overriding
 	/*!
 	  \return a new YPoint

@@ -4,11 +4,6 @@
 #include "YPoint.h"
 
 
-YAnimatedSprite* Crab::scuma()
-{
-	return m_scuma;
-}
-
 void Crab::start(SDL_Rect a_islandRect)
 {
 	m_islandRect = a_islandRect;
@@ -34,7 +29,7 @@ void Crab::update()
 		float offset = 15.0;
 
         if (m_position.x() < m_islandRect.x + m_islandRect.w &&
-            m_position.x() + m_frame.width > m_islandRect.x)
+            m_position.x() + m_frameWidth > m_islandRect.x)
         {
             m_scuma->visible(false);
 			if (m_state == JUMP_TO_ISLAND)

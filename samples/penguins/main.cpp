@@ -10,6 +10,7 @@
 #include "Penguin.h"
 #include "Fish.h"
 #include "Crab.h"
+#include "Cloud.h"
 
 /** C++ **/
 #include <functional>
@@ -25,13 +26,14 @@ YSpriteSheetManager::kError loadResources(YSpriteSheetManager* a_manager)
     } Sprite;
     
     Sprite sprites[] = {
-        {"background", "tropical_island_day.png"},
+        {"background", "scenario.png"},
         {"penguin", "penguin.png"},
         {"fish_blue", "fish_blue.png"},
 		{"fish_green", "fish_green.png"},
 		{"fish_red", "fish_red.png"},
 		{"crab_pink", "crab_pink.png"},
-        {"scuma", "scuma.png"}
+        {"scuma", "scuma.png"},
+        {"cloud", "cloud.png"}
     };
     
     int size = sizeof(sprites) / sizeof(Sprite);
@@ -95,8 +97,8 @@ int main(int argc, char* argv[])
 		Fish *fish = NULL;
 
 		fish = new Fish(spriteManager->findByName("fish_blue"),
-						YPoint(100.f, 100.f),
-                        YFrame(0, 0, 2, 10, 10, 15));
+						YPoint(0.f, 430.f),
+                        YFrame(0, 0, 5, 10, 10, 15));
         
         if (fish != NULL)
         {
@@ -124,10 +126,25 @@ int main(int argc, char* argv[])
 	crab->pause(false);
 	crab->visible(false);
 
-	bool falling = true;
+    /** creates cloud **/
+    SDL_Rect screen;
+    
+    screen.x = 0;
+    screen.y = 0;
+    screen.w = 640;
+    screen.h = 300;
+    
+    Cloud* cloud = new Cloud(spriteManager->findByName("cloud"),
+                             YPoint(-500, 0),
+                             screen);
+    
+    bool falling = true;
 
     YMain::FunctionUpdate update = [&](SDL_Event* a_event)
     {
+        fishes[0]->update();
+        cloud->update();
+        
 		if (falling == true)
 		{
 			YPoint position = penguin->position().add(gravity);
@@ -180,6 +197,14 @@ int main(int argc, char* argv[])
                        &nextFrameRect,
                        &dstRect);
 
+        /** draw cloud **/
+        dstRect = cloud->rect();
+        SDL_RenderCopy(a_renderer,
+                       cloud->texture(),
+                       NULL,
+                       &dstRect);
+        
+        
         /** draw fish **/
         Fish* fish = fishes.at(0);
         

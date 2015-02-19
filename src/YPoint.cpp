@@ -25,3 +25,18 @@ float YPoint::z() const
 {
     return m_z;
 }
+
+void YPoint::x(float a_x)
+{
+    m_x = a_x;
+}
+
+void YPoint::y(float a_y)
+{
+    m_y = a_y;
+}
+
+void YPoint::z(float a_z)
+{
+    m_z = a_z;
+}
