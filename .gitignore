@@ -1,4 +1,3 @@
 .DS_Store
-xcode-build
-win-build
 bin
+*-build
