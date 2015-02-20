@@ -87,7 +87,6 @@ int main(int argc, char** argv)
     }
     
     objectManager->add(bird);
-    objectManager->updateRender();
     
     game->start(objectManager->updater(),
                 objectManager->renderer(),
