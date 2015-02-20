@@ -28,7 +28,11 @@
 
 /** SDL2 **/
 #include <SDL.h>
-#include <SDL2_image/SDL_image.h>
+#ifdef WIN32
+	#include <SDL_image.h>	
+#else
+	#include <SDL2_image/SDL_image.h>	
+#endif
 
 /** Public Methods **/
 void YObject::render(SDL_Renderer* a_renderer) const
