@@ -9,6 +9,7 @@
 YObjectManager::YObjectManager()
 {
     m_started = false;
+    updateRender();    
 }
 
 YObjectManager::~YObjectManager()
