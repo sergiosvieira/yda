@@ -22,6 +22,7 @@
 
 /** C++ **/
 #include <cassert>
+#include <algorithm>
 
 /** YDA */
 #include "YObject.cpp"
