@@ -57,6 +57,7 @@ void createClouds(std::vector<Cloud*>&& a_clouds,
     }
 }
 
+#undef main
 int main(int argc, char** argv)
 {
     typedef struct
