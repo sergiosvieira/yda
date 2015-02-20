@@ -1,4 +1,10 @@
 # YDA (Yo?DA Engine) - Yes!! Another SDL Game Framework :)
+
+## Requirements
+1. C++11 Compiler
+2. CMake 3.1
+3. Patience :o)
+
 ## Install
 ### Windows: 
 #### You should set the enviroments variables
