@@ -3,7 +3,7 @@
 
 /** YDA Framework **/
 #include "YSprite.h"
-#include "YAnimated.h"
+#include "YSpriteHeader.h"
 
 /** SDL2 **/
 #include "SDL.h"
