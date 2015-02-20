@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 #include "YObject.h"
 
 #include "YVector.h"
@@ -30,3 +34,5 @@ protected:
     YVector m_velocity;
     YVector m_gravity;    
 };
+
+/** @}*/

@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 #ifndef __PENGUIN__
 #define __PENGUIN__
 
@@ -43,3 +47,5 @@ private:
 };
 
 #endif /** __PENGUIN__ **/
+
+/** @}*/

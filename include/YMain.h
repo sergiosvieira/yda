@@ -1,3 +1,7 @@
+/** \addtogroup YDA
+ *  @{
+ */
+
 /****************************************************************************
  Copyright (c) 2015 Sérgio Vieira - sergiosvieira@gmail.com
  
@@ -30,6 +34,17 @@
 /** Forwarding **/
 class YObjectManager;
 
+//! Main game entry
+/*!
+  This is the main class used to produce games with YDA Framework. 
+  - Firstly, you will needs to create a YObjectManager to store, update and render all
+  game obhects.
+  - After that, you will creates a YMain object passing game title, window width and 
+  height and the created YObjectManager
+  - Finally, you will creates a YSpriteSheet object to load all game's images.
+
+  To start the game just use the "start" method on YMain object
+*/
 class YMain
 {
 public:
@@ -76,8 +91,10 @@ protected:
     SDL_Window* m_window;//! Main window
     SDL_Renderer* m_renderer;//! Game renderer
     YObjectManager* m_objectManager;//! Game object manager
-    SDL_Texture* m_texture;
+    SDL_Texture* m_texture;//! Main window texture
 private:
 };
 
 #endif /** __YMAIN__ **/
+
+/** @}*/

@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 #ifndef __CRAB__
 #define __CRAB__
 
@@ -65,3 +69,5 @@ private:
 };
 
 #endif /** __CRAB__ **/
+
+/** @}*/

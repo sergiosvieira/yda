@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 #ifndef __FISH__
 #define __FISH__
 
@@ -27,3 +31,5 @@ protected:
 };
 
 #endif /** __FISH __ **/
+
+/** @}*/

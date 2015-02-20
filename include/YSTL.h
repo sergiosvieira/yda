@@ -1,3 +1,7 @@
+/** \addtogroup YDA
+ *  @{
+ */
+
 #ifndef __YSTL__
 #define __YSTL __
 
@@ -7,3 +11,5 @@
 typedef std::vector<const char*> VectorConstChar;
 
 #endif /** __YSTL__ **/
+
+/** @}*/

@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 /****************************************************************************
  Copyright (c) 2015 Sérgio Vieira - sergiosvieira@gmail.com
  
@@ -59,3 +63,5 @@ protected:
         m_position = YPoint(-320, distributionY(seed), (m_velocity.x() <= 1.5f) ? 0.f : 2.f );
     }
 };
+
+/** @}*/

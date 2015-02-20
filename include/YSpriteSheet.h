@@ -1,3 +1,7 @@
+/** \addtogroup YDA
+ *  @{
+ */
+
 /****************************************************************************
  Copyright (c) 2015 Sérgio Vieira - sergiosvieira@gmail.com
  
@@ -112,3 +116,5 @@ private:
 };
 
 #endif /** __YANIMATED_SPRITE__ **/
+
+/** @}*/

@@ -1,3 +1,7 @@
+/** \addtogroup YDA
+ *  @{
+ */
+
 #ifndef __YSPRITE_HEADER__
 #define __YSPRITE_HEADER__
 
@@ -28,3 +32,5 @@ typedef struct YFrame
 } YFrame;
 
 #endif /** __YSPRITE_HEADER__ **/
+
+/** @}*/

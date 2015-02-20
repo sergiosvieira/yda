@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 /****************************************************************************
  Copyright (c) 2015 Sérgio Vieira - sergiosvieira@gmail.com
  
@@ -50,3 +54,5 @@ protected:
 
 
 #endif /** __BACKGROUND__ **/
+
+/** @}*/

@@ -1,3 +1,7 @@
+/** \addtogroup YDA
+ *  @{
+ */
+
 /****************************************************************************
  Copyright (c) 2015 Sérgio Vieira - sergiosvieira@gmail.com
  
@@ -89,3 +93,5 @@ protected:
 };
 
 #endif /** __YPOINT__ **/
+
+/** @}*/

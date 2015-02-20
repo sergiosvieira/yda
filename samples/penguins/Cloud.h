@@ -1,3 +1,7 @@
+/** \addtogroup Samples
+ *  @{
+ */
+
 #ifndef __CLOUD__
 #define __CLOUD__
 
@@ -29,3 +33,5 @@ protected:
 };
 
 #endif /** __CLOUD__ **/
+
+/** @}@/
