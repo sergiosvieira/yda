@@ -2,7 +2,7 @@
 #define __YOBJECT_MANAGER__
 
 /** YDA **/
-#include 
+#include "YMain.h"
 
 /** STL **/
 #include <vector>
@@ -16,28 +16,32 @@ class YObject;
 class YObjectManager
 {
 public:
-	typedef std::vector<YObject*> VectorYObjectPointer;
-	//! Default constructor
-	YObjectManager();
-	//! Default destructor
-	~YObjectManager();
-	//! Adds a object to manager
-	/*!
-	  \param YObject - Game object pointer
-	*/
-	void add(YObject* a_object);
-	//! Remove a object from manager
-	/*!
-	  \param YObject - Game object pointer
-	*/
-	void remove(YObject* a_object);
-	//! Get object pointer at index
-	YObject* operator[](int a_index) const
-	{
-		return m_objects.at(a_index);
-	}
-	//! Starting to update and render game objects
-	void start();
+    typedef std::vector<YObject*> VectorYObjectPointer;
+    //! Default constructor
+    YObjectManager();
+    //! Default destructor
+    ~YObjectManager();
+    //! Adds a object to manager
+    /*!
+      \param YObject - Game object pointer
+    */
+    void add(YObject* a_object);
+    //! Remove a object from manager
+    /*!
+      \param YObject - Game object pointer
+    */
+    void remove(YObject* a_object);
+    //! Get object pointer at index
+    YObject* operator[](int a_index) const
+    {
+        return m_objects.at(a_index);
+    }
+    //! Starting to update and render game objects
+    void updateRender();
+    //! Updater
+    YMain::FunctionUpdate* updater();
+    //! Renderer
+    YMain::FunctionRender* renderer();
 protected:
 	int m_size; //! amount of objects
 	VectorYObjectPointer m_objects;//! Vector of YObject pointers	
