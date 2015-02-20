@@ -14,3 +14,7 @@ Install
 		2) SDL2_INCLUDE_DIR
 		3) SDLIMAGE_INCLUDE_DIR
 		4) SDLIMAGE_LIBRARY
+
+Samples
+=======
+![alt tag](https://raw.github.com/sergiosvieira/yda/master/samples/z-order/gfx/zorder.png)
