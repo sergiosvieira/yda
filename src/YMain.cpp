@@ -36,7 +36,8 @@ YMain::YMain(const char* a_title,
     assert(a_objectManager != nullptr);
     
     m_objectManager = a_objectManager;
-    
+    m_texture = nullptr;
+
 	SDL_Init(SDL_INIT_VIDEO);
 	m_window = SDL_CreateWindow(a_title,
 								SDL_WINDOWPOS_UNDEFINED, 
@@ -111,7 +112,18 @@ void YMain::start(int a_maxFrameRate,
         / float( SKIP_TICKS );
         
         /** render game **/
-        SDL_RenderClear(m_renderer);
+        if (m_texture == nullptr)
+        {
+            SDL_RenderClear(m_renderer);
+        }
+        else
+        {
+            SDL_RenderCopy(m_renderer,
+                           m_texture,
+                           nullptr,
+                           nullptr);
+        }
+
         (*renderer)(m_renderer);
         SDL_RenderPresent(m_renderer);
     }
@@ -120,4 +132,9 @@ void YMain::start(int a_maxFrameRate,
 SDL_Renderer* YMain::SDLRenderer()
 {
 	return m_renderer;
+}
+
+void YMain::textureBackground(SDL_Texture* a_texture)
+{
+    m_texture = a_texture;
 }

@@ -33,6 +33,7 @@ class YObjectManager;
 class YMain
 {
 public:
+  //! Default Main class errors
     typedef enum
     {
         NONE,
@@ -41,19 +42,41 @@ public:
     } Error;
     typedef std::function<void(SDL_Event*, float)> FunctionUpdate;
     typedef std::function<void(SDL_Renderer*)> FunctionRender;
+    //! Default Constructor
+    /*!
+      \param const char* - Window's title
+      \param int - Window's width,
+      \param int - Window's height
+      \param YObjectManager*
+      \param Error*
+    */
     YMain(const char* a_title,
           int a_width,
           int a_height,
           YObjectManager* a_objectManager,
           Error* a_error = nullptr);
+    //! Default desructor
     ~YMain();
+    //! Method to starting the game
+    /*!
+      \param int - Max game frame rate (default value 25)
+      \param int - Max game skip frames (default value 5)
+    */ 
     void start(int a_maxFrameRate = 25,
                int a_skipFrames = 5);
+    /*!
+      \return SDL_Renderer*
+    */
     SDL_Renderer* SDLRenderer();
+    /*!
+      \param SDL_Texture* - Bacground texture
+    */
+    void textureBackground(SDL_Texture* a_texture);
 protected:
-    SDL_Window* m_window;
-    SDL_Renderer* m_renderer;
-    YObjectManager* m_objectManager;
+    SDL_Window* m_window;//! Main window
+    SDL_Renderer* m_renderer;//! Game renderer
+    YObjectManager* m_objectManager;//! Game object manager
+    SDL_Texture* m_texture;
 private:
 };
 
