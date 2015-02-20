@@ -28,6 +28,7 @@
 #include "YObjectManager.h"
 #include "Bird.h"
 #include "Cloud.h"
+ #include "Background.h"
 
 /** STL **/
 #include <array>
@@ -36,6 +37,7 @@
 const char* kCloud01 = "cloud_01";
 const char* kCloud02 = "cloud_02";
 const char* kRedBird = "red_bird";
+const char* kBackground = "background";
 
 void createClouds(std::vector<Cloud*>&& a_clouds,
                   int a_size,
@@ -68,16 +70,17 @@ int main(int argc, char** argv)
     
     YObjectManager* objectManager = new YObjectManager();
     YMain* game = new YMain("Z-Order - sergiosvieira@gmail.com",
-                            640, 480,
+                            320, 240,
                             objectManager);
     
     /** Load Resources **/
     YSpriteManager* manager = new YSpriteManager(game->SDLRenderer());
-    std::array<KeyValue, 3> images = {
+    std::array<KeyValue, 4> images = {
       {
           {kCloud01, "cloud_01.png"},
           {kCloud02, "cloud_02.png"},
-          {kRedBird, "red_bird_set.png"}
+          {kRedBird, "red_bird_set.png"},
+          {kBackground, "background.png"}
       }
     };
     
@@ -88,15 +91,23 @@ int main(int argc, char** argv)
                                                kv.value.c_str()));
     }
     
+    /** Creates Background **/
+    YSprite* bgSprite = new YSprite(manager->findByName(kBackground));
+    Background* bg = new Background(bgSprite);
+
+    bg->position().z(-1.f);
+    objectManager->add(bg);
+
+
     /** Creates Clouds **/
     std::vector<Cloud*> clouds;
     createClouds(std::move(clouds),
-                 100,
+                 10,
                  manager);
     
 
     /** Creates Bird **/
-    YSpriteSheet* birdSprite = new YSpriteSheet(manager->findByName("red_bird"),
+    YSpriteSheet* birdSprite = new YSpriteSheet(manager->findByName(kRedBird),
                                                 YFrame(0, 0, 5),
                                                 64,
                                                 40,
@@ -110,6 +121,7 @@ int main(int argc, char** argv)
     }
     
     objectManager->add(bird);
+
     game->start();
     
     delete objectManager;

@@ -17,45 +17,36 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+ 
+#ifndef __BACKGROUND__
+#define __BACKGROUND__
 
-/** YDA **/
 #include "YObject.h"
-#include "YPoint.h"
-#include "YVector.h"
 
-/** C++ **/
-#include <random>
-
-static std::mt19937_64 seed;
-
-class Cloud: public YObject
+class Background: public YObject
 {
 public:
-    Cloud(YSprite* a_sprite): YObject(nullptr,
-                                      a_sprite,
-                                      YPoint(0.f, 0.f),
-                                      YPoint(0.f, 0.f),
-                                      true)
-    {
-        randomize();
-    };
-    void update(float a_deltaT)
-    {
-        if (m_position.x() > 320)
-        {
-            randomize();
-        }
-        
-        m_position = m_position.add(m_velocity);
-    }
-protected:
+	Background(YSprite* a_sprite): YObject(nullptr,
+										   a_sprite,
+										   YPoint(0.f, 0.f),
+										   YPoint(0.f, 0.f),
+										   true)
+	{
+		m_position = YPoint(-(m_sprite->width() - 320.f), 0.f);
+		m_velocity = YVector(4.f, 0.f);
+	};
+	virtual void update(float a_deltaT)
+	{
+		m_position = m_position.add(m_velocity);
 
-    YVector m_velocity;
-    void randomize()
-    {
-        std::uniform_int_distribution<> distributionY(0, 240);
-        std::uniform_real_distribution<> velocityX(0.5, 3.5);
-        m_velocity = YVector(velocityX(seed), 0.f);
-        m_position = YPoint(-320, distributionY(seed), (m_velocity.x() <= 1.5f) ? 0.f : 2.f );
-    }
+		if (m_position.x() == 0)
+		{
+			m_position = YPoint(-(m_sprite->width() - 320.f), 0.f);
+		}
+	} 	
+protected:
+	YVector m_velocity;
 };
+
+
+#endif /** __BACKGROUND__ **/

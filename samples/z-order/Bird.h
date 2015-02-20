@@ -17,13 +17,16 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+ 
+#include "YObject.h"
+
 
 class Bird: public YObject
 {
 public:
     Bird(YSprite* a_sprite): YObject(nullptr,
                                      a_sprite,
-                                     YPoint(320.f, 240.f, 1.f),
+                                     YPoint(160.f, 120.f, 1.f),
                                      YPoint(0.f, 0.f),
                                      true)
     {
