@@ -49,6 +49,9 @@ void YMain::start(FunctionUpdate* a_update,
                   int a_maxFrameRate,
                   int a_skipFrames)
 {
+    assert(a_update != nullptr);
+    assert(a_render != nullptr);
+    
     const int SKIP_TICKS = 1000.f / (float)a_maxFrameRate;
     bool quit = false;
     int loops;
