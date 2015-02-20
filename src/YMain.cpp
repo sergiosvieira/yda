@@ -3,11 +3,20 @@
 /** C++ **/
 #include <cassert>
 
+/** YDA **/
+#include "YObjectManager.cpp"
+
+
 YMain::YMain(const char* a_title,
 		  	 int a_width,
 		  	 int a_height,
+             YObjectManager* a_objectManager,
 		  	 Error* a_error)
 {
+    assert(a_objectManager != nullptr);
+    
+    m_objectManager = a_objectManager;
+    
 	SDL_Init(SDL_INIT_VIDEO);
 	m_window = SDL_CreateWindow(a_title,
 								SDL_WINDOWPOS_UNDEFINED, 
@@ -44,20 +53,17 @@ YMain::~YMain()
 	SDL_Quit();
 }
 
-void YMain::start(FunctionUpdate* a_update,
-                  FunctionRender* a_render,
-                  int a_maxFrameRate,
+void YMain::start(int a_maxFrameRate,
                   int a_skipFrames)
 {
-    assert(a_update != nullptr);
-    assert(a_render != nullptr);
-    
     const int SKIP_TICKS = 1000.f / (float)a_maxFrameRate;
     bool quit = false;
     int loops;
     SDL_Event event;
     Uint32 next_game_tick = SDL_GetTicks();
     float interpolation;
+    FunctionUpdate* updater = m_objectManager->updater();
+    FunctionRender* renderer = m_objectManager->renderer();
     
     while (!quit)
     {
@@ -76,7 +82,7 @@ void YMain::start(FunctionUpdate* a_update,
               && loops < a_skipFrames)
         {
             /** update game **/
-            (*a_update)(&event, interpolation);
+            (*updater)(&event, interpolation);
             next_game_tick += SKIP_TICKS;
             loops++;
         }
@@ -86,12 +92,12 @@ void YMain::start(FunctionUpdate* a_update,
         
         /** render game **/
         SDL_RenderClear(m_renderer);
-        (*a_render)(m_renderer);
+        (*renderer)(m_renderer);
         SDL_RenderPresent(m_renderer);
     }
 }
 
-SDL_Renderer* YMain::renderer()
+SDL_Renderer* YMain::SDLRenderer()
 {
 	return m_renderer;
 }

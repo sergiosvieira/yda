@@ -14,7 +14,13 @@ YObjectManager::YObjectManager()
 
 YObjectManager::~YObjectManager()
 {
-
+    for (YObject* object: m_objects)
+    {
+        if (object != nullptr)
+        {
+            delete object;
+        }
+    }
 }
 
 void YObjectManager::add(YObject* a_object)

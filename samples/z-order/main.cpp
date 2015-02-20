@@ -45,11 +45,13 @@ int main(int argc, char** argv)
         std::string value;
     } KeyValue;
     
-    YMain* game = new YMain("Z-Order - sergiosvieira@gmail.com", 640, 480);
     YObjectManager* objectManager = new YObjectManager();
+    YMain* game = new YMain("Z-Order - sergiosvieira@gmail.com",
+                            640, 480,
+                            objectManager);
     
     /** Load Resources **/
-    YSpriteManager* manager = new YSpriteManager(game->renderer());
+    YSpriteManager* manager = new YSpriteManager(game->SDLRenderer());
     std::array<KeyValue, 3> images = {
       {
           {kCloud01, "cloud_01.png"},
@@ -87,11 +89,11 @@ int main(int argc, char** argv)
     }
     
     objectManager->add(bird);
+    game->start();
     
-    game->start(objectManager->updater(),
-                objectManager->renderer(),
-                25,
-                5);
+    delete objectManager;
+    delete game;
+    delete manager;
     
     return 0;
 }
