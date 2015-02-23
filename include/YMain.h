@@ -87,11 +87,23 @@ public:
       \param SDL_Texture* - Bacground texture
     */
     void textureBackground(SDL_Texture* a_texture);
+    //! Getting window width
+    /*!
+      \return int - Window's width
+    */
+    int width() const;
+    //! Getting window height
+    /*!
+      \return int - Window's height
+    */
+    int height() const;
 protected:
     SDL_Window* m_window;//! Main window
     SDL_Renderer* m_renderer;//! Game renderer
     YObjectManager* m_objectManager;//! Game object manager
     SDL_Texture* m_texture;//! Main window texture
+    int m_width; //! Window's width
+    int m_height; //! Window's height
 private:
 };
 

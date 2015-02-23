@@ -37,6 +37,8 @@ YMain::YMain(const char* a_title,
     
     m_objectManager = a_objectManager;
     m_texture = nullptr;
+    m_width = a_width;
+    m_height = a_height;
 
 	SDL_Init(SDL_INIT_VIDEO);
 	m_window = SDL_CreateWindow(a_title,
@@ -137,4 +139,14 @@ SDL_Renderer* YMain::SDLRenderer()
 void YMain::textureBackground(SDL_Texture* a_texture)
 {
     m_texture = a_texture;
+}
+
+int YMain::width() const
+{
+    return m_width;
+}
+
+int YMain::height() const
+{
+    return m_height;
 }
