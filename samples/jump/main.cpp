@@ -50,9 +50,12 @@ YSpriteManager::Error loadResources(YSpriteManager* a_manager)
     
     for (const KeyValue& kv: images)
     {
-        result = a_manager->add(kv.key.c_str(),
-                                YFileSystem::fullPathName({"gfx"},
-                                                           kv.value.c_str()));
+        std::string fullPath;
+        YFileSystem::fullPathName(fullPath,
+                                  {"gfx"},
+                                  kv.value.c_str());
+
+        result = a_manager->add(kv.key.c_str(), fullPath);
 
         if (result != YSpriteManager::NONE)
         {

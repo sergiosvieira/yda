@@ -57,14 +57,16 @@ public:
         m_position = m_position.add(m_velocity);
     }
 protected:
-    YMain m_main;
+    YMain* m_main;
     YVector m_velocity;
     void randomize()
     {
-        std::uniform_int_distribution<> distributionY(0, 240);
+        std::uniform_int_distribution<> distributionY(0, m_main->height() / 2.f);
         std::uniform_real_distribution<> velocityX(0.5, 3.5);
         m_velocity = YVector(velocityX(seed), 0.f);
-        m_position = YPoint(-320, distributionY(seed), (m_velocity.x() <= 1.5f) ? 0.f : 2.f );
+        m_position = YPoint(-m_main->width(), 
+                            distributionY(seed), 
+                            (m_velocity.x() <= 1.5f) ? 0.f : 2.f );
     }
 };
 

@@ -20,7 +20,8 @@ static const char* kBackground = "background";
 static const char* kCloud_01 = "cloud_01";
 static const char* kCloud_02 = "cloud_02";
 
-void createClouds(std::vector<Cloud*>&& a_clouds,
+void createClouds(YMain* a_main,
+                  std::vector<Cloud*>&& a_clouds,
                   int a_size,
                   YSpriteManager* a_manager)
 {
@@ -31,7 +32,7 @@ void createClouds(std::vector<Cloud*>&& a_clouds,
         const char* name = (i % 2 == 0) ? kCloud_01 : kCloud_02;
         float z = (i % 2 == 0) ? 0.f : 2.f;
         YSprite* cloudSprite = new YSprite(a_manager->findByName(name));
-        Cloud* cloud01 = new Cloud(cloudSprite);
+        Cloud* cloud01 = new Cloud(cloudSprite, a_main);
         YPoint position = cloud01->position();
         
         position.z(z);
@@ -66,9 +67,12 @@ YSpriteManager::Error loadResources(YSpriteManager* a_manager)
     
     for (const KeyValue& kv: images)
     {
-        result = a_manager->add(kv.key.c_str(),
-                                YFileSystem::fullPathName({"gfx"},
-                                                           kv.value.c_str()));
+        std::string fullPath;
+        YFileSystem::fullPathName(fullPath,
+                                  {"gfx"},
+                                  kv.value.c_str());
+
+        result = a_manager->add(kv.key.c_str(), fullPath);
 
         if (result != YSpriteManager::NONE)
         {
@@ -97,7 +101,8 @@ int main(int argc, char* argv[])
 
     /** Creates Clouds **/
     std::vector<Cloud*> clouds;
-    createClouds(std::move(clouds),
+    createClouds(game,
+                 std::move(clouds),
                  10,
                  spriteManager);
 
