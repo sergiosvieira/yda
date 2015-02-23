@@ -42,14 +42,15 @@
 /** C++ **/
 #include <sstream>
 
-const char* YFileSystem::kSeparator =
+const std::string YFileSystem::kSeparator =
 #ifdef _WIN32
     "\\";
 #else
     "/";
 #endif
 
-std::string YFileSystem::currentDir(Error* a_error)
+void YFileSystem::currentDir(std::string& a_dir,
+                             Error* a_error)
 {
     char cCurrentPath[FILENAME_MAX];
 
@@ -63,28 +64,35 @@ std::string YFileSystem::currentDir(Error* a_error)
 
 	cCurrentPath[sizeof(cCurrentPath) - 1] = '\0'; /* not really required */
 
-	return std::string(cCurrentPath);
+    a_dir.clear();
+	a_dir += std::string(cCurrentPath);
 }
 
-std::string YFileSystem::fullPathName(VectorConstChar&& a_subdirectories,
-                                      const char* a_filename)
+void YFileSystem::fullPathName(std::string& a_fullpath,
+                               VectorConstChar&& a_subdirectories,
+                               const std::string& a_filename)
 {
     Error error = NONE;
-    std::stringstream ss;
-    std::string cDir = currentDir(&error);
+
+    std::string cDir;
+
+    currentDir(cDir, 
+               &error);
     
     if (error == NONE)
     {
-        ss << cDir;
+        a_fullpath.clear();
+        size_t size = cDir.size() + a_subdirectories.size() * kSeparator.size() + a_filename.size();
+        a_fullpath.reserve(size);
+        a_fullpath += cDir;
         
         for (const char* sub: a_subdirectories)
         {
-            ss << kSeparator;
-            ss << sub;
+            a_fullpath += kSeparator;
+            a_fullpath += sub;
         }
         
-        ss << kSeparator << a_filename;
+        a_fullpath += kSeparator;
+        a_fullpath += a_filename;
     }
-    
-    return ss.str();
 }

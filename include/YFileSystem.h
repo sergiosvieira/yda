@@ -45,17 +45,21 @@ public:
 	} Error;
     //! Getting current directory
     /*!
+      \param std::string& - Result dir
       \param Error*
     */
-	static std::string currentDir(Error* a_error = nullptr);
+	static void currentDir(std::string& a_dir,
+                         Error* a_error = nullptr);
     //! Create full path string based on subdirectories and file name
     /*!
-      \param std::vector<const char*>&& - Subdirectories
+      \param std::string& - Result full path
+      \param std::vector<const char*>& - Subdirectories
       \param const char* - File name
     */
-    static std::string fullPathName(VectorConstChar&& a_subdirectories,
-                                    const char* a_filename);
-    static const char* kSeparator;
+    static void fullPathName(std::string& a_fullPath,
+                             VectorConstChar&& a_subdirectories,
+                             const std::string& a_filename);
+    static const std::string kSeparator;
 };
 
 #endif /** __YFILE_SYSTEM__ **/
