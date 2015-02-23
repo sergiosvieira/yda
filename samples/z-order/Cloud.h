@@ -26,26 +26,30 @@
 #include "YObject.h"
 #include "YPoint.h"
 #include "YVector.h"
+#include "YMain.h"
 
 /** C++ **/
 #include <random>
+
 
 static std::mt19937_64 seed;
 
 class Cloud: public YObject
 {
 public:
-    Cloud(YSprite* a_sprite): YObject(nullptr,
-                                      a_sprite,
-                                      YPoint(0.f, 0.f),
-                                      YPoint(0.f, 0.f),
-                                      true)
+    Cloud(YSprite* a_sprite,
+          YMain* a_main): YObject(nullptr,
+                                  a_sprite,
+                                  YPoint(0.f, 0.f),
+                                  YPoint(0.f, 0.f),
+                                  true)
     {
+        m_main = a_main;
         randomize();
     };
     void update(float a_deltaT)
     {
-        if (m_position.x() > 320)
+        if (m_position.x() > m_main->width())
         {
             randomize();
         }
@@ -53,7 +57,7 @@ public:
         m_position = m_position.add(m_velocity);
     }
 protected:
-
+    YMain m_main;
     YVector m_velocity;
     void randomize()
     {

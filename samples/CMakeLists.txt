@@ -1,1 +1,1 @@
-subdirs(jump z-order)
+subdirs(penguins jump z-order)
