@@ -84,7 +84,7 @@ void YMain::start(int a_maxFrameRate,
     int loops;
     SDL_Event event;
     Uint32 next_game_tick = SDL_GetTicks();
-    float interpolation;
+    float interpolation = 0.f;
     FunctionUpdate* updater = m_objectManager->updater();
     FunctionRender* renderer = m_objectManager->renderer();
     

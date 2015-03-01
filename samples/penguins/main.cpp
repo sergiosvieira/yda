@@ -10,6 +10,8 @@
 /** Penguin **/
 #include "../z-order/Cloud.h"
 #include "YSprite.h"
+#include "YSpriteSheet.h"
+#include "Penguin.h"
 
 /** C++ **/
 #include <functional>
@@ -26,7 +28,7 @@ void createClouds(YMain* a_main,
                   YSpriteManager* a_manager)
 {
     a_clouds.reserve(a_size);
-    
+
     for (int i = 0; i < a_size; ++i)
     {
         const char* name = (i % 2 == 0) ? kCloud_01 : kCloud_02;
@@ -34,7 +36,6 @@ void createClouds(YMain* a_main,
         YSprite* cloudSprite = new YSprite(a_manager->findByName(name));
         Cloud* cloud01 = new Cloud(cloudSprite, a_main);
         YPoint position = cloud01->position();
-        
         position.z(z);
         cloud01->position(position);
         a_clouds.push_back(cloud01);
@@ -110,6 +111,16 @@ int main(int argc, char* argv[])
     {
         objectManager->add(cloud);
     }
+
+    /** Creates Penguin **/
+    YSpriteSheet* penguinSprite = new YSpriteSheet(spriteManager->findByName("penguin"),
+                                                   YFrame(0, 0, 8),
+                                                   10,
+                                                   10,
+                                                   10);
+    Penguin* penguin = new Penguin(penguinSprite, game);
+    
+    objectManager->add(penguin);
 
     game->start();
 
