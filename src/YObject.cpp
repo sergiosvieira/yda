@@ -30,9 +30,14 @@
 #include <SDL.h>
 #ifdef WIN32
 	#include <SDL_image.h>	
-#else
-	#include <SDL2_image/SDL_image.h>	
 #endif
+#ifdef UNIX
+  #include <SDL_image.h>  
+#endif
+#ifdef APPLE
+  #include <SDL2_image/SDL_image.h> 
+#endif
+	
 
 /** Public Methods **/
 void YObject::render(SDL_Renderer* a_renderer) const

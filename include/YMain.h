@@ -25,6 +25,9 @@
 #ifndef __YMAIN__
 #define __YMAIN__
 
+/** YDA **/
+ #include "YPlatform.h"
+
 /** C++ **/
 #include <functional>
 
