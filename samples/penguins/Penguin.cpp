@@ -26,13 +26,13 @@ void Penguin::update(float a_deltaT)
 
 void Penguin::startJump()
 {
-	if (m_onTheGround == true)
+	if (m_jumping == false)
 	{
-		m_onTheGround = false;
+		m_jumping = true;
 	}
 }
 
-void Peguin::endJump()
+void Penguin::endJump()
 {
 
 }
