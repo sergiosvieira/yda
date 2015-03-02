@@ -1,0 +1,6 @@
+#ifndef __YPLATFORM__
+#define __YPLATFORM__
+
+#define ${PLATFORM}
+
+#endif
