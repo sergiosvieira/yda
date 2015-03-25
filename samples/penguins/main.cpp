@@ -77,8 +77,8 @@ YSpriteManager::Error loadResources(YSpriteManager* a_manager)
 
         if (result != YSpriteManager::NONE)
         {
-            printf("Error on loading %s\n",
-                   kv.value.c_str());
+            printf("Error on loading %s %s\n",
+                   fullPath.c_str(), kv.value.c_str());
             success &= false;
         }
     }
