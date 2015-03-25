@@ -50,13 +50,18 @@ void YObject::render(SDL_Renderer* a_renderer) const
     
     dstRect.x = m_position.x();
     dstRect.y = m_position.y();
-    dstRect.w = m_sprite->width();
-    dstRect.h = m_sprite->height();
+    dstRect.w = m_sprite->width() * m_sprite->scale().x();
+    dstRect.h = m_sprite->height() * m_sprite->scale().y();
+
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
     
-    SDL_RenderCopy(a_renderer,
-                   m_sprite->texture(),
-                   &srcRect,
-                   &dstRect);
+    SDL_RenderCopyEx(a_renderer,
+                     m_sprite->texture(),
+                     &srcRect,
+                     &dstRect,
+                     m_sprite->rotation(),
+                     nullptr,
+                     flip);
 }
 
 YPoint YObject::position() const

@@ -120,8 +120,10 @@ int main(int argc, char* argv[])
                                                    10);
     Penguin* penguin = new Penguin(penguinSprite, game);
     
+    penguin->sprite()->scale(YPoint(2.5f, 2.5f));
+    penguin->sprite()->rotation(-90.f);
+    
     objectManager->add(penguin);
-
     game->start();
 
     delete spriteManager;

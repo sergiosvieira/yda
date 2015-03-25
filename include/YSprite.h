@@ -59,10 +59,20 @@ public:
       \return SDL_Rect - Rect(0, 0, width, height)
     */
 	virtual SDL_Rect rect();
+    //! Setting scale width and height
+    void scale(const YPoint& a_scale);
+    //! Getting scale width and height
+    const YPoint scale() const;
+    //! Setting sprite rotation angle in degrees
+    void rotation(float m_angle);
+    //! Getting sprite rotation angle
+    float rotation() const;
 protected:
 	int m_width;//! Sprite width
 	int m_height;//! Sprite height
-	SDL_Texture* m_texture;//! Sprite texture
+    YPoint m_scale;//! Sprite width scale (default 1.0f)
+    float m_angle;//! Sprite rotation angle in degrees
+    SDL_Texture* m_texture;//! Sprite texture
 };
 
 #endif /** __YSPRITE __ **/

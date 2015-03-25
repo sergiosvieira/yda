@@ -31,7 +31,8 @@
 YSprite::YSprite(SDL_Texture* a_texture)
 {
 	m_texture = a_texture;
-
+    m_scale = YPoint(1.f, 1.f);
+    
 	/** getting texture width and height **/
 	SDL_QueryTexture(a_texture, 
 					 nullptr,
@@ -63,4 +64,24 @@ SDL_Rect YSprite::rect()
 	result.h = m_height;
 
 	return result;
+}
+
+void YSprite::scale(const YPoint& a_scale)
+{
+    m_scale = a_scale;
+}
+
+const YPoint YSprite::scale() const
+{
+    return m_scale;
+}
+
+void YSprite::rotation(float a_angle)
+{
+    m_angle = a_angle;
+}
+//! Getting sprite rotation angle
+float YSprite::rotation() const
+{
+    return m_angle;
 }

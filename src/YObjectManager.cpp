@@ -56,7 +56,7 @@ void YObjectManager::remove(YObject* a_object)
     m_objects.erase(std::remove(m_objects.begin(),
                                 m_objects.end(), 
                                 a_object), 
-                    m_objects.end());
+                                m_objects.end());
 }
 
 void YObjectManager::updateRender()
