@@ -30,6 +30,6 @@ elseif (APPLE)
 endif (UNIX)
 
 # Generate platform header
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/cmake/YPlatform.h.in ${CMAKE_CURRENT_SOURCE_DIR}/include/YPlatform.h)
+configure_file (${CMAKE_SOURCE_DIR}/cmake/YPlatform.h.in ${CMAKE_SOURCE_DIR}/include/YPlatform.h)
 
 subdirs(include src samples)
