@@ -23,8 +23,8 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __YSPRITE_SHEET_MANAGER__
-#define __YSPRITE_SHEET_MANAGER__
+#ifndef __YSPRITE_MANAGER__
+#define __YSPRITE_MANAGER__
 
 /** C++ **/
 #include <string>
@@ -60,6 +60,6 @@ private:
     static bool m_initialized;
 };
 
-#endif /** __YSPRITE_SHEET_MANAGER__ **/
+#endif /** __YSPRITE_MANAGER__ **/
 
 /** @}*/

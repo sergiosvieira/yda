@@ -22,8 +22,8 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __YGAME_OBJECT__
-#define __YGAME_OBJECT__
+#ifndef __YOBJECT__
+#define __YOBJECT__
 
 /** C++ **/
 #include <cstdio>
@@ -124,6 +124,6 @@ protected:
 	bool m_visible;
 };
 
-#endif /** __YGAME_OBJECT__ **/
+#endif /** __YOBJECT__ **/
 
 /** @}*/

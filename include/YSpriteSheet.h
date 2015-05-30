@@ -22,8 +22,8 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __YANIMATED_SPRITE__
-#define __YANIMATED_SPRITE__
+#ifndef __YSPRITE_SHEET__
+#define __YSPRITE_SHEET__
 
 /** YDA Framework **/
 #include "YSprite.h"
@@ -115,6 +115,6 @@ private:
     SDL_Rect nextFrame();    
 };
 
-#endif /** __YANIMATED_SPRITE__ **/
+#endif /** __YSPRITE_SHEET__ **/
 
 /** @}*/
