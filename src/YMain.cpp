@@ -33,14 +33,17 @@ YMain::YMain(const char* a_title,
              Error* a_error): m_objectManager(a_objectManager),
                               m_size(a_size)
 {
+    m_world = YRect<int>(YPoint<int>(0, 0), a_size);
+    m_window = m_world;
+    m_viewport = m_world;
     m_texture = nullptr;
 	SDL_Init(SDL_INIT_VIDEO);
     m_sdlWindow = SDL_CreateWindow(a_title,
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    m_size.width,
-                                    m_size.height,
-                                    0);
+                                   SDL_WINDOWPOS_UNDEFINED,
+                                   SDL_WINDOWPOS_UNDEFINED,
+                                   m_size.width,
+                                   m_size.height,
+                                   0);
     if (m_sdlWindow == nullptr)
 	{
 		if (a_error != nullptr)
@@ -81,7 +84,14 @@ void YMain::start(int a_maxFrameRate,
     float interpolation = 0.f;
     FunctionUpdate* updater = m_objectManager.updater();
     FunctionRender* renderer = m_objectManager.renderer();
-    
+    SDL_Rect sourceRect = {
+        m_window.left(),
+        m_window.top(),
+        m_window.size.width,
+        m_window.size.height
+    };
+    SDL_Rect destinyRect = sourceRect;
+
     while (!quit)
     {
         SDL_PollEvent(&event);
@@ -116,8 +126,8 @@ void YMain::start(int a_maxFrameRate,
         {
             SDL_RenderCopy(m_renderer,
                            m_texture,
-                           nullptr,
-                           nullptr);
+                           &sourceRect,
+                           &destinyRect);
         }
 
         (*renderer)(m_renderer);

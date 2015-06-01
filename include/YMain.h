@@ -106,9 +106,9 @@ protected:
     SDL_Texture* m_texture;//! Main window texture
     YSize<int> m_size;
 private:
-    YRect<float> m_world;
-    YRect<float> m_window;
-    YRect<float> m_viewport;
+    YRect<int> m_world;//! World in computer graphics concepts
+    YRect<int> m_window;//! Window in computer graphics concepts
+    YRect<int> m_viewport;//! Viewport in computer graphics concepts
 };
 
 #endif /** __YMAIN__ **/
