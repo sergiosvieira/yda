@@ -71,11 +71,11 @@ int main(int argc, char** argv)
     
     YObjectManager* objectManager = new YObjectManager();
     YMain* game = new YMain("Z-Order - sergiosvieira@gmail.com",
-                            320, 240,
-                            objectManager);
+                            YSize(320, 240),
+                            *objectManager);
     
     /** Load Resources **/
-    YSpriteManager* manager = new YSpriteManager(game->SDLRenderer());
+    YSpriteManager* manager = new YSpriteManager(*game->SDLRenderer());
     std::array<KeyValue, 4> images = {
       {
           {kCloud01, "cloud_01.png"},

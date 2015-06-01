@@ -28,24 +28,18 @@
 
 
 YMain::YMain(const char* a_title,
-		  	 int a_width,
-		  	 int a_height,
-             YObjectManager* a_objectManager,
-		  	 Error* a_error)
+		  	 const YSize& a_size,
+             YObjectManager& a_objectManager,
+             Error* a_error): m_objectManager(a_objectManager),
+                              m_size(a_size)
 {
-    assert(a_objectManager != nullptr);
-    
-    m_objectManager = a_objectManager;
     m_texture = nullptr;
-    m_width = a_width;
-    m_height = a_height;
-
 	SDL_Init(SDL_INIT_VIDEO);
 	m_window = SDL_CreateWindow(a_title,
 								SDL_WINDOWPOS_UNDEFINED, 
 								SDL_WINDOWPOS_UNDEFINED, 
-								a_width,
-								a_height, 
+								m_size.width,
+								m_size.height,
 								0);
 	if (m_window == nullptr)
 	{
@@ -85,8 +79,8 @@ void YMain::start(int a_maxFrameRate,
     SDL_Event event;
     Uint32 next_game_tick = SDL_GetTicks();
     float interpolation = 0.f;
-    FunctionUpdate* updater = m_objectManager->updater();
-    FunctionRender* renderer = m_objectManager->renderer();
+    FunctionUpdate* updater = m_objectManager.updater();
+    FunctionRender* renderer = m_objectManager.renderer();
     
     while (!quit)
     {
@@ -143,10 +137,10 @@ void YMain::textureBackground(SDL_Texture* a_texture)
 
 int YMain::width() const
 {
-    return m_width;
+    return m_size.width;
 }
 
 int YMain::height() const
 {
-    return m_height;
+    return m_size.height;
 }

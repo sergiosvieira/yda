@@ -89,13 +89,13 @@ YSpriteManager::Error loadResources(YSpriteManager* a_manager)
 int main(int argc, char* argv[])
 {
     YObjectManager* objectManager = new YObjectManager();
-	/** creates window **/
+	/** creates window **/    
     YMain* game = new YMain("Penguins - sergiosvieira@gmail.com",
-                            640, 480,
-                            objectManager);
+                            YSize(640, 480),
+                            *objectManager);
     
-	/** loads resources **/
-	YSpriteManager* spriteManager = new YSpriteManager(game->SDLRenderer());
+    /** loading resources **/
+    YSpriteManager* spriteManager = new YSpriteManager(*game->SDLRenderer());
 
     loadResources(spriteManager);
     game->textureBackground(spriteManager->findByName(kBackground));
@@ -114,14 +114,12 @@ int main(int argc, char* argv[])
 
     /** Creates Penguin **/
     YSpriteSheet* penguinSprite = new YSpriteSheet(spriteManager->findByName("penguin"),
-                                                   YFrame(0, 0, 8),
-                                                   10,
-                                                   10,
+                                                   YFrame(0, 0, 8, YSize(10, 10)),
                                                    10);
     Penguin* penguin = new Penguin(penguinSprite, game);
     
-    penguin->sprite()->scale(YPoint(2.5f, 2.5f));
-    penguin->sprite()->rotation(-90.f);
+    penguin->sprite()->scale(YPoint(5.5f, 5.5f));
+    //penguin->sprite()->rotation(-90.f);
     
     objectManager->add(penguin);
     game->start();

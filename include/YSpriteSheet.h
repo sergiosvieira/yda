@@ -39,9 +39,7 @@ class YSpriteSheet : public YSprite
 public:
 	//! Default constructor
 	YSpriteSheet(): YSprite(nullptr),
-					   		m_frame(YFrame(0, 0, 0)),
-					   		m_frameWidth(0),
-							m_frameHeight(0),
+                            m_frame(YFrame(0, 0, 0, YSize(0,0))),
 							m_fps(0),
 							m_paused(false){};
 	//! Constructor with arguments
@@ -53,23 +51,18 @@ public:
 	  \param Animation FPS (Frame Per Second)
 	*/
 	YSpriteSheet(SDL_Texture* a_texture,
-				 YFrame a_frame,
-				 int a_frameWidth,
-				 int a_frameHeight,
+                 YFrame a_frame,
 				 int a_framesPerSecond):
 				 YSprite(a_texture),
-				 m_frame(a_frame),
-				 m_frameWidth(a_frameWidth),
-				 m_frameHeight(a_frameHeight),
-				 m_fps(a_framesPerSecond)
+                 m_frame(a_frame),
+                 m_fps(a_framesPerSecond),
+                 m_paused(false)
 	{
-		m_frame = a_frame;
-		m_cols = (float)m_width / (float)m_frameWidth;
-		m_rows = (float)m_height / (float)m_frameHeight;
+        m_cols = (float)a_frame.size.width / (float)a_frame.size.height;
+        m_rows = (float)m_height / (float)a_frame.size.height;
 		m_previousTick = SDL_GetTicks();
         m_updateCycle = 1000.f / (float)m_fps;
-        m_paused = false;
-	};
+    };
     //! Rect method overriding
     virtual SDL_Rect rect() override;
 	//! Pause the sprite animation
@@ -99,8 +92,6 @@ public:
     virtual int height() override;
 protected:
 	YFrame m_frame; //! Frame settings
-	int m_frameWidth; //! Frame width
-	int m_frameHeight; //! Frame height
 	int m_fps; //! Animation speed (Frames per Second)
 private:
 	bool m_paused;

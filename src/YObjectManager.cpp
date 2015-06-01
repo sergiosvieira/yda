@@ -33,21 +33,8 @@ YObjectManager::YObjectManager()
     updateRender();    
 }
 
-YObjectManager::~YObjectManager()
-{
-    for (YObject* object: m_objects)
-    {
-        if (object != nullptr)
-        {
-            delete object;
-        }
-    }
-}
-
 void YObjectManager::add(YObject* a_object)
 {
-    assert(a_object != nullptr);
-
     m_objects.push_back(a_object);
 }
 
@@ -91,7 +78,7 @@ void YObjectManager::updateRender()
             for (YObject* object: m_objects)
             {
                 object->render(a_renderer);
-            }	    	
+            }
         };	
     }
 }

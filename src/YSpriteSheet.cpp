@@ -44,12 +44,12 @@ void YSpriteSheet::frameRange(int a_first, int a_last)
 
 int YSpriteSheet::width()
 {
-    return m_frameWidth;
+    return m_frame.size.width;
 }
 
 int YSpriteSheet::height()
 {
-    return m_frameHeight;
+    return m_frame.size.height;
 }
 
 /** Private Methods **/
@@ -57,10 +57,10 @@ SDL_Rect YSpriteSheet::nextFrame()
 {
     SDL_Rect result = {};
     
-    result.x = (m_frame.current % m_cols) * m_frameWidth;
-    result.y = (m_frame.current / m_cols) * m_frameHeight;
-    result.h = m_frameHeight;
-    result.w = m_frameWidth;
+    result.x = (m_frame.current % m_cols) * m_frame.size.width;
+    result.y = (m_frame.current / m_cols) * m_frame.size.height;
+    result.h = m_frame.size.height;
+    result.w = m_frame.size.width;
     
     if (!m_paused)
     {

@@ -26,7 +26,8 @@
 #define __YMAIN__
 
 /** YDA **/
- #include "YPlatform.h"
+#include "YSize.h"
+#include "YPlatform.h"
 
 /** C++ **/
 #include <functional>
@@ -63,15 +64,13 @@ public:
     //! Default Constructor
     /*!
       \param const char* - Window's title
-      \param int - Window's width,
-      \param int - Window's height
-      \param YObjectManager*
+      \param YSize - Window's size,
+      \param YObjectManager&
       \param Error*
     */
     YMain(const char* a_title,
-          int a_width,
-          int a_height,
-          YObjectManager* a_objectManager,
+          const YSize& a_size,
+          YObjectManager& a_objectManager,
           Error* a_error = nullptr);
     //! Default desructor
     ~YMain();
@@ -103,10 +102,9 @@ public:
 protected:
     SDL_Window* m_window;//! Main window
     SDL_Renderer* m_renderer;//! Game renderer
-    YObjectManager* m_objectManager;//! Game object manager
+    YObjectManager& m_objectManager;//! Game object manager
     SDL_Texture* m_texture;//! Main window texture
-    int m_width; //! Window's width
-    int m_height; //! Window's height
+    YSize m_size;
 private:
 };
 

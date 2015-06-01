@@ -26,17 +26,13 @@
 /** Initializing constants **/
 bool YSpriteManager::m_initialized = false;
 
-YSpriteManager::YSpriteManager(SDL_Renderer* a_renderer)
+YSpriteManager::YSpriteManager(SDL_Renderer& a_renderer): m_renderer(a_renderer)
 {
-	assert(a_renderer != nullptr);
-
     if (YSpriteManager::m_initialized == false)
     {
         IMG_Init(IMG_INIT_PNG);
         YSpriteManager::m_initialized = true;
     }
-    
-	m_renderer = a_renderer ;
 }
 
 YSpriteManager::~YSpriteManager()
@@ -120,14 +116,13 @@ SDL_Texture* YSpriteManager::findByName(std::string a_key)
 	return result;
 }
 
-SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer* a_renderer,
-                                              const char* a_filename,
-                                              Error* a_error)
+SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer& a_renderer,
+                                          const char* a_filename,
+                                          Error* a_error)
 {
     SDL_Texture* result = nullptr;
 
-    if (a_renderer == nullptr ||
-        a_filename == nullptr)
+    if (a_filename == nullptr)
     {
         if (a_error != nullptr)
         {
@@ -154,7 +149,7 @@ SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer* a_renderer,
         }
         else
         {
-            result = SDL_CreateTextureFromSurface(a_renderer,
+            result = SDL_CreateTextureFromSurface(&a_renderer,
                                                   surface);
             
             if (result == nullptr)

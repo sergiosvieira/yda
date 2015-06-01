@@ -73,11 +73,11 @@ int main(int argc, char** argv)
     /** creates window **/
     YObjectManager* objectManager = new YObjectManager();
     YMain* game = new YMain("Jumping - sergiosvieira@gmail.com",
-                            640, 480,
-                            objectManager);
+                            YSize(640, 480),
+                            *objectManager);
     
     /** loads resources **/
-    YSpriteManager* spriteManager = new YSpriteManager(game->SDLRenderer());
+    YSpriteManager* spriteManager = new YSpriteManager(*game->SDLRenderer());
     
     if (loadResources(spriteManager) != YSpriteManager::NONE)
     {

@@ -40,11 +40,9 @@ class YObject;
 class YObjectManager
 {
 public:
-    typedef std::vector<YObject*> VectorYObjectPointer;
+    typedef std::vector<YObject*> VectorOfYObjects;
     //! Default constructor
     YObjectManager();
-    //! Default destructor
-    ~YObjectManager();
     //! Adds a object to manager
     /*!
       \param YObject - Game object pointer
@@ -68,7 +66,7 @@ public:
     YMain::FunctionRender* renderer();
 protected:
 	int m_size; //! amount of objects
-	VectorYObjectPointer m_objects;//! Vector of YObject pointers	
+    VectorOfYObjects m_objects;//! Vector of YObject pointers
 	YMain::FunctionUpdate m_update;//! Function update
 	YMain::FunctionRender m_render;//! Function render
 private:
