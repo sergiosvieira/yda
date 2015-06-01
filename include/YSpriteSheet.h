@@ -39,7 +39,7 @@ class YSpriteSheet : public YSprite
 public:
 	//! Default constructor
 	YSpriteSheet(): YSprite(nullptr),
-                            m_frame(YFrame(0, 0, 0, YSize(0,0))),
+                            m_frame(YFrame(0, 0, 0, YSize<int>(0,0))),
 							m_fps(0),
 							m_paused(false){};
 	//! Constructor with arguments

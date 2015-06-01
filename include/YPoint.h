@@ -25,71 +25,91 @@
 #ifndef __YPOINT__
 #define __YPOINT__
 
-/** Forwarding class **/
-class YVector;
+#include "YVector.h"
 
 /*!
   A point is a abstract concept used in games to represents a game object positioning
 */
+template <class T>
 class YPoint
 {
 public:
 	//!	Constructor with two arguments
-	YPoint(float a_x,
-		   float a_y):
+    YPoint(T a_x,
+           T a_y,
+           T a_z):
 		   m_x(a_x),
-		   m_y(a_y),
-           m_z(0.f){};
-    //! Constructor with three arguments
-    YPoint(float a_x,
-           float a_y,
-           float a_z):
-           m_x(a_x),
            m_y(a_y),
            m_z(a_z){};
-    //! Constructor without arguments
-	YPoint(): m_x(0.f),
-              m_y(0.f),
-              m_z(0.f){};
-	//! Point component
+    //!	Constructor with two arguments
+    YPoint(T a_x,
+           T a_y):
+           m_x(a_x),
+           m_y(a_y),
+           m_z(0){};
+    //! Point component
 	/*!
 	  \return x component of the point
 	*/
-	float x() const;
+    T x() const
+    {
+        return m_x;
+    }
 	//! Point component
 	/*!
 	  \return y component of the point
 	*/
-	float y() const;
+    T y() const
+    {
+        return m_y;
+    }
     //! Point component
     /*!
-     \return z component of the point
-     */
-    float z() const;
-    //! Setting x component
-    /*!
-      \param float
+      \return z component of the point
     */
-    void x(float x);
+    T z() const
+    {
+        return m_z;
+    }
     //! Setting x component
     /*!
-     \param float
-     */
-    void y(float x);
-    //! Setting x component
+      \param T
+    */
+    void x(T a_x)
+    {
+        m_x = a_x;
+    }
+    //! Setting y component
     /*!
-     \param float
+     \param T
      */
-    void z(float x);
-	//! Creates a new point added to a vector using operator overriding
+    void y(T a_y)
+    {
+        m_y = a_y;
+    }
+    //! Setting z component
+    /*!
+     \param T
+     */
+    void z(T a_z)
+    {
+        m_z = a_z;
+    }
+    //! Creates a new point added to a vector using operator overriding
 	/*!
 	  \return a new YPoint
 	*/
-	YPoint add(YVector& a_vector) const;
+    YPoint<T> add(YVector& a_vector) const
+    {
+        return YPoint<T>(m_x + (T)a_vector.x(),
+                         m_y + (T)a_vector.y(),
+                         m_z + (T)a_vector.z());
+
+    }
 protected:
-	float m_x; //! x component of the point
-	float m_y; //! y component of the pont
-    float m_z; //! z component of the point
+    T m_x; //! x component of the point
+    T m_y; //! y component of the pont
+    T m_z; //! z component of the point
 };
 
 #endif /** __YPOINT__ **/

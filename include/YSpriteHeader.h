@@ -27,7 +27,7 @@ typedef struct YFrame
 	YFrame(int a_current,
 		   int a_first,
            int a_last,
-           const YSize& a_size):
+           const YSize<int>& a_size):
 		   current(a_current),
 		   first(a_first),
            last(a_last),
@@ -36,7 +36,7 @@ typedef struct YFrame
 	int current; //! Current frame index
 	int first; //! First frame index
     int last; //! Last frame index
-    YSize size; //! Frame size
+    YSize<int> size; //! Frame size
 } YFrame;
 
 #endif /** __YSPRITE_HEADER__ **/

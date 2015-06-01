@@ -4,31 +4,36 @@
 #include "YPoint.h"
 #include "YSize.h"
 
-typedef struct YRect
+template <typename T>
+struct YRect
 {
-    YPoint position;
-    YSize size;
-    YRect(const YPoint& a_position,
-          const YSize& a_size):
+    YPoint<T> position;
+    YSize<T> size;
+    YRect(): position(YPoint<T>(0, 0)),
+             size(YSize<T>(0, 0))
+    {}
+
+    YRect(const YPoint<T>& a_position,
+          const YSize<T>& a_size):
           position(a_position),
           size(a_size)
     {}
-    float top() const
+    T top() const
     {
         return position.x();
     }
-    float left() const
+    T left() const
     {
         return position.y();
     }
-    float bottom() const
+    T bottom() const
     {
-        return top() + (float)size.height;
+        return top() + size.height;
     }
-    float right() const
+    T right() const
     {
-        return left() + (float)size.width;
+        return left() + size.width;
     }
-} YRect;
+};
 
 #endif /** __YRECT__ **/

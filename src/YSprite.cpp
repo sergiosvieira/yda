@@ -28,10 +28,10 @@
 #include <SDL_image.h>
 
 
-YSprite::YSprite(SDL_Texture* a_texture)
+YSprite::YSprite(SDL_Texture* a_texture):
+                 m_scale(YPoint<float>(1.f, 1.f))
 {
 	m_texture = a_texture;
-    m_scale = YPoint(1.f, 1.f);
     
 	/** getting texture width and height **/
 	SDL_QueryTexture(a_texture, 
@@ -66,12 +66,12 @@ SDL_Rect YSprite::rect()
 	return result;
 }
 
-void YSprite::scale(const YPoint& a_scale)
+void YSprite::scale(const YPoint<float> &a_scale)
 {
     m_scale = a_scale;
 }
 
-const YPoint YSprite::scale() const
+const YPoint<float> YSprite::scale() const
 {
     return m_scale;
 }

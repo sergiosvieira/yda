@@ -40,8 +40,8 @@ public:
     Cloud(YSprite* a_sprite,
           YMain* a_main): YObject(nullptr,
                                   a_sprite,
-                                  YPoint(0.f, 0.f),
-                                  YPoint(0.f, 0.f),
+                                  YPoint<int>(0, 0),
+                                  YPoint<int>(0, 0),
                                   true)
     {
         m_main = a_main;
@@ -64,7 +64,7 @@ protected:
         std::uniform_int_distribution<> distributionY(0, m_main->height() / 2.f);
         std::uniform_real_distribution<> velocityX(0.5, 3.5);
         m_velocity = YVector(velocityX(seed), 0.f);
-        m_position = YPoint(-m_main->width(), 
+        m_position = YPoint<int>(-m_main->width(),
                             distributionY(seed), 
                             (m_velocity.x() <= 1.5f) ? 0.f : 2.f );
     }

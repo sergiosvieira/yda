@@ -14,8 +14,8 @@ public:
     Penguin(YSprite* a_sprite,
             YMain* a_main): YObject(nullptr,
                                     a_sprite,
-                                    YPoint(a_main->width() / 2.f, 0.f),
-                                    YPoint(0.f, 0.f),
+                                    YPoint<int>(a_main->width() / 2, 0),
+                                    YPoint<int>(0, 0),
                                     true)
     {
         m_jumping = false;

@@ -26,7 +26,7 @@
 #define __YMAIN__
 
 /** YDA **/
-#include "YSize.h"
+#include "YRect.h"
 #include "YPlatform.h"
 
 /** C++ **/
@@ -69,7 +69,7 @@ public:
       \param Error*
     */
     YMain(const char* a_title,
-          const YSize& a_size,
+          const YSize<int>& a_size,
           YObjectManager& a_objectManager,
           Error* a_error = nullptr);
     //! Default desructor
@@ -100,12 +100,15 @@ public:
     */
     int height() const;
 protected:
-    SDL_Window* m_window;//! Main window
+    SDL_Window* m_sdlWindow;//! Main window
     SDL_Renderer* m_renderer;//! Game renderer
     YObjectManager& m_objectManager;//! Game object manager
     SDL_Texture* m_texture;//! Main window texture
-    YSize m_size;
+    YSize<int> m_size;
 private:
+    YRect<float> m_world;
+    YRect<float> m_window;
+    YRect<float> m_viewport;
 };
 
 #endif /** __YMAIN__ **/

@@ -60,9 +60,9 @@ public:
     */
 	virtual SDL_Rect rect();
     //! Setting scale width and height
-    void scale(const YPoint& a_scale);
+    void scale(const YPoint<float>& a_scale);
     //! Getting scale width and height
-    const YPoint scale() const;
+    const YPoint<float> scale() const;
     //! Setting sprite rotation angle in degrees
     void rotation(float m_angle);
     //! Getting sprite rotation angle
@@ -70,7 +70,7 @@ public:
 protected:
 	int m_width;//! Sprite width
 	int m_height;//! Sprite height
-    YPoint m_scale;//! Sprite width scale (default 1.0f)
+    YPoint<float> m_scale;//! Sprite width scale (default 1.0f)
     float m_angle;//! Sprite rotation angle in degrees
     SDL_Texture* m_texture;//! Sprite texture
 };

@@ -35,7 +35,7 @@ void createClouds(YMain* a_main,
         float z = (i % 2 == 0) ? 0.f : 2.f;
         YSprite* cloudSprite = new YSprite(a_manager->findByName(name));
         Cloud* cloud01 = new Cloud(cloudSprite, a_main);
-        YPoint position = cloud01->position();
+        YPoint<int> position = cloud01->position();
         position.z(z);
         cloud01->position(position);
         a_clouds.push_back(cloud01);
@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
     YObjectManager* objectManager = new YObjectManager();
 	/** creates window **/    
     YMain* game = new YMain("Penguins - sergiosvieira@gmail.com",
-                            YSize(640, 480),
+                            YSize<int>(640, 480),
                             *objectManager);
     
     /** loading resources **/
@@ -114,11 +114,11 @@ int main(int argc, char* argv[])
 
     /** Creates Penguin **/
     YSpriteSheet* penguinSprite = new YSpriteSheet(spriteManager->findByName("penguin"),
-                                                   YFrame(0, 0, 8, YSize(10, 10)),
+                                                   YFrame(0, 0, 8, YSize<int>(10, 10)),
                                                    10);
     Penguin* penguin = new Penguin(penguinSprite, game);
     
-    penguin->sprite()->scale(YPoint(5.5f, 5.5f));
+    penguin->sprite()->scale(YPoint<float>(5.5f, 5.5f));
     //penguin->sprite()->rotation(-90.f);
     
     objectManager->add(penguin);

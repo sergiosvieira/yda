@@ -64,22 +64,22 @@ void YObject::render(SDL_Renderer* a_renderer) const
                      flip);
 }
 
-YPoint YObject::position() const
+YPoint<int> YObject::position() const
 {
 	return m_position;
 }
 
-void YObject::position(YPoint a_position)
+void YObject::position(YPoint<int> a_position)
 {
 	m_position = a_position;
 }
 
-YPoint YObject::anchor() const
+YPoint<int> YObject::anchor() const
 {
 	return m_anchor;
 }
 
-void YObject::anchor(YPoint a_anchor)
+void YObject::anchor(YPoint<int> a_anchor)
 {
 	m_anchor = a_anchor;
 }

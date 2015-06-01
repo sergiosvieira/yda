@@ -28,20 +28,20 @@
 
 
 YMain::YMain(const char* a_title,
-		  	 const YSize& a_size,
+             const YSize<int> &a_size,
              YObjectManager& a_objectManager,
              Error* a_error): m_objectManager(a_objectManager),
                               m_size(a_size)
 {
     m_texture = nullptr;
 	SDL_Init(SDL_INIT_VIDEO);
-	m_window = SDL_CreateWindow(a_title,
-								SDL_WINDOWPOS_UNDEFINED, 
-								SDL_WINDOWPOS_UNDEFINED, 
-								m_size.width,
-								m_size.height,
-								0);
-	if (m_window == nullptr)
+    m_sdlWindow = SDL_CreateWindow(a_title,
+                                    SDL_WINDOWPOS_UNDEFINED,
+                                    SDL_WINDOWPOS_UNDEFINED,
+                                    m_size.width,
+                                    m_size.height,
+                                    0);
+    if (m_sdlWindow == nullptr)
 	{
 		if (a_error != nullptr)
 		{
@@ -50,7 +50,7 @@ YMain::YMain(const char* a_title,
 	}
 	else
 	{
-    	m_renderer = SDL_CreateRenderer(m_window, 
+        m_renderer = SDL_CreateRenderer(m_sdlWindow,
 										-1,
 										0);
 
@@ -66,7 +66,7 @@ YMain::YMain(const char* a_title,
 
 YMain::~YMain()
 {
-	SDL_DestroyWindow(m_window);
+    SDL_DestroyWindow(m_sdlWindow);
 	SDL_Quit();
 }
 

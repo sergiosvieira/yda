@@ -51,8 +51,8 @@ public:
 	 */
 	YObject(YObject* a_parent,
 			YSprite* a_sprite,
-            YPoint a_position,
-			YPoint a_anchor,
+            YPoint<int> a_position,
+            YPoint<int> a_anchor,
 			bool a_visibility):
             m_parent(a_parent),
             m_sprite(a_sprite),
@@ -62,8 +62,8 @@ public:
 	//! Default constructor
 	YObject(): m_parent(nullptr),
 			   m_sprite(nullptr),
-               m_position(YPoint(0.f, 0.f)),
-			   m_anchor(YPoint(0.f, 0.f)),
+               m_position(YPoint<int>(0, 0)),
+               m_anchor(YPoint<int>(0, 0)),
 			   m_visible(true){};
     //! Default desctructor
     virtual ~YObject(){};
@@ -85,19 +85,19 @@ public:
 	/*!
 	  \return Current game object position
 	 */
-	YPoint position() const;
+    YPoint<int> position() const;
 	/*!
 	  Setting the game object position
 	*/
-	void position(YPoint a_position);
+    void position(YPoint<int> a_position);
 	/*!
 	  \return Anchor position
 	*/
-	YPoint anchor() const;
+    YPoint<int> anchor() const;
 	/*!
 	  Setting the game object velocity
 	*/ 
-	void anchor(YPoint a_anchor);
+    void anchor(YPoint<int> a_anchor);
 	/*!
 	  Setting the visibility of game object
 	*/
@@ -117,9 +117,9 @@ protected:
     //! Sprite
     YSprite* m_sprite;
     //! Position on the screen
-	YPoint m_position;
+    YPoint<int> m_position;
 	//! Anchor position
-	YPoint m_anchor;
+    YPoint<int> m_anchor;
 	//! Visibility
 	bool m_visible;
 };
