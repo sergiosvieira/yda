@@ -7,8 +7,8 @@ void YTransformations::transformPointBetweenRects(YPoint<int> &a_destinyPoint,
                                                   const YRect<int> &a_sourceRect,
                                                   const YRect<int> &a_destinyRect)
 {
-    float ratioX = (a_sourcePoint.x() - a_sourceRect.left()) / a_sourceRect.size.width;
-    float ratioY = -(a_sourcePoint.y() - a_sourceRect.top()) / a_sourceRect.size.height;
+    float ratioX = ((float)a_sourcePoint.x() - (float)a_sourceRect.left()) / (float)a_sourceRect.size.width;
+    float ratioY = -((float)a_sourcePoint.y() - (float)a_sourceRect.top()) / (float)a_sourceRect.size.height;
 
     a_destinyPoint.x(a_destinyRect.left() + a_destinyRect.size.width * ratioX);
     a_destinyPoint.y(a_destinyRect.top() + a_destinyRect.size.height * ratioY);

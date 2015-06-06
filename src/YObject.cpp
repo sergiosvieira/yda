@@ -22,6 +22,8 @@
 
 /** YDA **/
 #include "YSprite.h"
+#include "YTransformations.h"
+#include "YMain.h"
 
 /** C++ **/
 #include <cassert>
@@ -46,10 +48,16 @@ void YObject::render(SDL_Renderer* a_renderer) const
     assert(m_sprite != nullptr);
     
     SDL_Rect srcRect = m_sprite->rect();
-    SDL_Rect dstRect;
-    
-    dstRect.x = m_position.x();
-    dstRect.y = m_position.y();
+    SDL_Rect dstRect;    
+    YPoint<int> position;
+    YRect<int> window = YMain::window();
+    YRect<int> viewport = YMain::viewport();
+    YTransformations::transformPointBetweenRects(position,
+                                                 m_position,
+                                                 window,
+                                                 viewport);
+    dstRect.x = position.x();
+    dstRect.y = position.y();
     dstRect.w = m_sprite->width() * m_sprite->scale().x();
     dstRect.h = m_sprite->height() * m_sprite->scale().y();
 

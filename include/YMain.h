@@ -52,7 +52,10 @@ class YObjectManager;
 class YMain
 {
 public:
-  //! Default Main class errors
+    static YRect<int> world();//! World in computer graphics concepts
+    static YRect<int> window();//! Window in computer graphics concepts
+    static YRect<int> viewport();//! Viewport in computer graphics concepts
+    //! Default Main class errors
     typedef enum
     {
         NONE,
@@ -105,10 +108,9 @@ protected:
     YObjectManager& m_objectManager;//! Game object manager
     SDL_Texture* m_texture;//! Main window texture
     YSize<int> m_size;
-private:
-    YRect<int> m_world;//! World in computer graphics concepts
-    YRect<int> m_window;//! Window in computer graphics concepts
-    YRect<int> m_viewport;//! Viewport in computer graphics concepts
+    static YRect<int> m_world;//! World in computer graphics concepts
+    static YRect<int> m_window;//! Window in computer graphics concepts
+    static YRect<int> m_viewport;//! Viewport in computer graphics concepts
 };
 
 #endif /** __YMAIN__ **/

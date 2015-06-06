@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
     YObjectManager* objectManager = new YObjectManager();
 	/** creates window **/    
     YMain* game = new YMain("Penguins - sergiosvieira@gmail.com",
-                            YSize<int>(640, 480),
+                            YSize<int>(320, 240),
                             *objectManager);
     
     /** loading resources **/

@@ -47,6 +47,10 @@ public:
            m_x(a_x),
            m_y(a_y),
            m_z(0){};
+    YPoint():
+        m_x(0),
+        m_y(0),
+        m_z(0){};
     //! Point component
 	/*!
 	  \return x component of the point

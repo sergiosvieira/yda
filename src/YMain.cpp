@@ -26,6 +26,26 @@
 /** YDA **/
 #include "YObjectManager.cpp"
 
+/** Initializing Variables **/
+YRect<int> YMain::m_world = {};
+YRect<int> YMain::m_window = {};
+YRect<int> YMain::m_viewport = {};
+
+
+YRect<int> YMain::world()
+{
+    return m_world;
+}
+
+YRect<int> YMain::window()
+{
+    return m_window;
+}
+
+YRect<int> YMain::viewport()
+{
+    return m_viewport;
+}
 
 YMain::YMain(const char* a_title,
              const YSize<int> &a_size,
@@ -33,9 +53,9 @@ YMain::YMain(const char* a_title,
              Error* a_error): m_objectManager(a_objectManager),
                               m_size(a_size)
 {
-    m_world = YRect<int>(YPoint<int>(0, 0), a_size);
-    m_window = m_world;
-    m_viewport = m_world;
+    YMain::m_world = YRect<int>(YPoint<int>(0, 0), a_size);
+    YMain::m_window = m_world;
+    YMain::m_viewport = m_world;
     m_texture = nullptr;
 	SDL_Init(SDL_INIT_VIDEO);
     m_sdlWindow = SDL_CreateWindow(a_title,
