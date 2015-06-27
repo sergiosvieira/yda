@@ -102,6 +102,7 @@ public:
       \return int - Window's height
     */
     int height() const;
+    void updateError(Error* a_error, Error a_errorValue);
 protected:
     SDL_Window* m_sdlWindow;//! Main window
     SDL_Renderer* m_renderer;//! Game renderer

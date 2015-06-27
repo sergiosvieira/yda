@@ -58,6 +58,7 @@ private:
 	TextureMap m_textures;
     SDL_Renderer& m_renderer;
     static bool m_initialized;
+    static void updateError(Error* a_error, Error a_errorValue);
 };
 
 #endif /** __YSPRITE_MANAGER__ **/

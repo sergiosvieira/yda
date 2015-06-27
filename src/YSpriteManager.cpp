@@ -124,10 +124,7 @@ SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer& a_renderer,
 
     if (a_filename == nullptr)
     {
-        if (a_error != nullptr)
-        {
-            *a_error = LOADING_ERROR;
-        }
+        updateError(a_error, LOADING_ERROR);
     }
     else
     {
@@ -142,10 +139,7 @@ SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer& a_renderer,
         
         if (surface == nullptr)
         {
-            if (a_error != nullptr)
-            {
-                *a_error = LOADING_ERROR;
-            }
+            updateError(a_error, LOADING_ERROR);
         }
         else
         {
@@ -154,13 +148,18 @@ SDL_Texture* YSpriteManager::loadTexture(SDL_Renderer& a_renderer,
             
             if (result == nullptr)
             {
-                if (a_error != nullptr)
-                {
-                    *a_error = CREATING_TEXTURE_ERROR;
-                }
+                updateError(a_error, CREATING_TEXTURE_ERROR);
             }
         }
-    }
-    
+    }    
     return result;
+}
+
+void YSpriteManager::updateError(YSpriteManager::Error *a_error,
+                                 YSpriteManager::Error a_errorValue)
+{
+    if (a_error != nullptr)
+    {
+        *a_error = a_errorValue;
+    }
 }

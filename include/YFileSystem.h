@@ -60,6 +60,8 @@ public:
                              VectorConstChar&& a_subdirectories,
                              const std::string& a_filename);
     static const std::string kSeparator;
+private:
+    static void updateError(Error* a_error, Error a_errorValue);
 };
 
 #endif /** __YFILE_SYSTEM__ **/

@@ -49,21 +49,23 @@ const std::string YFileSystem::kSeparator =
     "/";
 #endif
 
+void YFileSystem::updateError(Error* a_error, Error a_errorValue)
+{
+    if (a_error != nullptr)
+    {
+        *a_error = a_errorValue;
+    }
+}
+
 void YFileSystem::currentDir(std::string& a_dir,
                              Error* a_error)
 {
     char cCurrentPath[FILENAME_MAX];
-
 	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
     {
-    	if (a_error != nullptr)
-    	{
-    		*a_error = GET_CURRENT_DIR_ERROR;
-    	}
+        updateError(a_error, GET_CURRENT_DIR_ERROR);
     }
-
 	cCurrentPath[sizeof(cCurrentPath) - 1] = '\0'; /* not really required */
-
     a_dir.clear();
 	a_dir += std::string(cCurrentPath);
 }
@@ -73,12 +75,8 @@ void YFileSystem::fullPathName(std::string& a_fullpath,
                                const std::string& a_filename)
 {
     Error error = NONE;
-
     std::string cDir;
-
-    currentDir(cDir, 
-               &error);
-    
+    currentDir(cDir, &error);    
     if (error == NONE)
     {
         a_fullpath.clear();

@@ -47,6 +47,14 @@ YRect<int> YMain::viewport()
     return m_viewport;
 }
 
+void YMain::updateError(Error* a_error, Error a_errorValue)
+{
+    if (a_error != nullptr)
+    {
+        *a_error = a_errorValue;
+    }
+}
+
 YMain::YMain(const char* a_title,
              const YSize<int> &a_size,
              YObjectManager& a_objectManager,
@@ -66,23 +74,14 @@ YMain::YMain(const char* a_title,
                                    0);
     if (m_sdlWindow == nullptr)
 	{
-		if (a_error != nullptr)
-		{
-			*a_error = CREATING_ERROR;
-		}
+        updateError(a_error, CREATING_ERROR);
 	}
 	else
 	{
-        m_renderer = SDL_CreateRenderer(m_sdlWindow,
-										-1,
-										0);
-
+        m_renderer = SDL_CreateRenderer(m_sdlWindow, -1, 0);
     	if (m_renderer == nullptr)
     	{
-    		if (a_error != nullptr)
-    		{
-    			*a_error = RENDERING_ERROR;
-    		}
+            updateError(a_error, RENDERING_ERROR);
     	}
 	}
 }
