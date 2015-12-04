@@ -26,6 +26,9 @@
 /** YDA **/
 #include "YObjectManager.cpp"
 
+/** SDL2 **/
+#include <SDL_image.h>
+
 /** Initializing Variables **/
 YRect<int> YMain::m_world = {};
 YRect<int> YMain::m_window = {};
@@ -61,9 +64,9 @@ YMain::YMain(const char* a_title,
              Error* a_error): m_objectManager(a_objectManager),
                               m_size(a_size)
 {
-    YMain::m_world = YRect<int>(YPoint<int>(0, 0), a_size);
+    YMain::m_world = YRect<int>(YPoint<int>(0, 0), YSize<int>(1024, 768));
     YMain::m_window = m_world;
-    YMain::m_viewport = m_world;
+    YMain::m_viewport = YRect<int>(YPoint<int>(0, 0), a_size);
     m_texture = nullptr;
 	SDL_Init(SDL_INIT_VIDEO);
     m_sdlWindow = SDL_CreateWindow(a_title,
@@ -103,27 +106,35 @@ void YMain::start(int a_maxFrameRate,
     float interpolation = 0.f;
     FunctionUpdate* updater = m_objectManager.updater();
     FunctionRender* renderer = m_objectManager.renderer();
-    SDL_Rect sourceRect = {
+    SDL_Rect srcRect =
+    {
+        m_viewport.left(),
+        m_viewport.top(),
+        m_viewport.size.width,
+        m_viewport.size.height
+    };
+    SDL_Rect dstRect =
+    {
         m_window.left(),
         m_window.top(),
         m_window.size.width,
         m_window.size.height
     };
-    SDL_Rect destinyRect = sourceRect;
-
+    SDL_Texture* offscreen = SDL_CreateTexture(m_renderer,
+                                               SDL_PIXELFORMAT_ARGB8888,
+                                               SDL_TEXTUREACCESS_TARGET,
+                                               m_viewport.size.width,
+                                               m_viewport.size.height);
     while (!quit)
     {
-        SDL_PollEvent(&event);
-        
+        SDL_PollEvent(&event);     
         switch (event.type)
         {
             case SDL_QUIT:
                 quit = true;
                 break;
         }
-        
         loops = 0;
-        
         while(SDL_GetTicks() > next_game_tick
               && loops < a_skipFrames)
         {
@@ -132,26 +143,31 @@ void YMain::start(int a_maxFrameRate,
             next_game_tick += SKIP_TICKS;
             loops++;
         }
-        
         interpolation = float(SDL_GetTicks() + SKIP_TICKS - next_game_tick)
-        / float( SKIP_TICKS );
-        
+                        / float( SKIP_TICKS );
         /** render game **/
+        bool success = SDL_SetRenderTarget(m_renderer, offscreen) == 0;
         if (m_texture == nullptr)
         {
             SDL_RenderClear(m_renderer);
         }
         else
         {
+            SDL_RenderSetViewport(m_renderer, &srcRect);
             SDL_RenderCopy(m_renderer,
                            m_texture,
-                           &sourceRect,
-                           &destinyRect);
+                           nullptr,
+                           nullptr);
         }
-
         (*renderer)(m_renderer);
+        SDL_SetRenderTarget(m_renderer, nullptr);
+        SDL_RenderCopy(m_renderer,
+                       offscreen,
+                       nullptr,
+                       &dstRect);
         SDL_RenderPresent(m_renderer);
     }
+    SDL_DestroyTexture(offscreen);
 }
 
 SDL_Renderer* YMain::SDLRenderer()

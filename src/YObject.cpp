@@ -49,20 +49,30 @@ void YObject::render(SDL_Renderer* a_renderer) const
     
     SDL_Rect srcRect = m_sprite->rect();
     SDL_Rect dstRect;    
-    YPoint<int> position;
+    YPoint<int> topLeft;
     YRect<int> window = YMain::window();
     YRect<int> viewport = YMain::viewport();
-    YTransformations::transformPointBetweenRects(position,
+    YTransformations::transformPointBetweenRects(topLeft,
                                                  m_position,
                                                  window,
                                                  viewport);
-    dstRect.x = position.x();
-    dstRect.y = position.y();
-    dstRect.w = m_sprite->width() * m_sprite->scale().x();
-    dstRect.h = m_sprite->height() * m_sprite->scale().y();
-
+    dstRect.x = topLeft.x();
+    dstRect.y = topLeft.y();
+    YPoint<int> dstBottomRight = {};
+    YPoint<int> srcBottomRight =
+    {
+        m_position.x() + m_sprite->width(),
+        m_position.y() + m_sprite->height()
+    };
+    YTransformations::transformPointBetweenRects(dstBottomRight,
+                                                 srcBottomRight,
+                                                 window,
+                                                 viewport);
+    int width = dstBottomRight.x() - topLeft.x();
+    int height = topLeft.y() - dstBottomRight.y();
+    dstRect.w = width * m_sprite->scale().x();
+    dstRect.h = height * m_sprite->scale().y();
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    
     SDL_RenderCopyEx(a_renderer,
                      m_sprite->texture(),
                      &srcRect,

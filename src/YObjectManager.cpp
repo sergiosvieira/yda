@@ -51,28 +51,17 @@ void YObjectManager::updateRender()
     if (m_started == false)
     {
         m_started = true;
-        
-        struct
-        {
-            bool operator()(YObject* a_first, YObject* a_second) const
-            {
-                return a_first->position().z() < a_second->position().z();
-            }
-        } Comparator;
-
         m_update = [&](SDL_Event* a_event, float a_deltaT)
         {
             std::sort(m_objects.begin(),
                       m_objects.end(),
                       Comparator);
-            
             for (YObject* object: m_objects)
             {
                 object->processEvents(a_event);
                 object->update(a_deltaT);
             }
         };
-        
         m_render = [&](SDL_Renderer* a_renderer)
         {
             for (YObject* object: m_objects)

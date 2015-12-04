@@ -27,12 +27,10 @@
 
 /** YDA **/
 #include "YMain.h"
+#include "YObject.h"
 
 /** STL **/
 #include <vector>
-
-/** Forwarding **/
-class YObject;
 
 /*!
   This class is used to manager the objects of the game (deallocation, z-order etc)
@@ -70,6 +68,13 @@ protected:
 	YMain::FunctionUpdate m_update;//! Function update
 	YMain::FunctionRender m_render;//! Function render
 private:
+    struct
+    {
+        bool operator()(YObject* a_first, YObject* a_second) const
+        {
+            return a_first->position().z() < a_second->position().z();
+        }
+    } Comparator;
 	bool m_started;//! Stating update and render flag
 };
 

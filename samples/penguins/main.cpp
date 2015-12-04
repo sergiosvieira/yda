@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
 
     for (Cloud* cloud: clouds)
     {
-        objectManager->add(cloud);
+        //objectManager->add(cloud);
     }
 
     /** Creates Penguin **/
