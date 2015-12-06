@@ -30,8 +30,8 @@ class Bird: public YObject
 public:
     Bird(YSprite* a_sprite): YObject(nullptr,
                                      a_sprite,
-                                     YPoint(160.f, 120.f, 1.f),
-                                     YPoint(0.f, 0.f),
+                                     YPoint<int>(160, 120, 1),
+                                     YPoint<int>(0, 0),
                                      true)
     {
     };

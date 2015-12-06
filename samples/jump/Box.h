@@ -13,8 +13,8 @@ class Box: public YObject
 public:
     Box(YSprite* a_sprite): YObject(nullptr,
                                      a_sprite,
-                                     YPoint(320.f, 240.f, 1.f),
-                                     YPoint(0.f, 0.f),
+                                     YPoint<int>(320, 240, 1),
+                                     YPoint<int>(0, 0),
                                      true)
     {
         m_onGround = false;

@@ -28,7 +28,7 @@ void Box::update(float a_deltaT)
     
     if (m_position.y() + m_sprite->height() > 350.f)
     {
-        m_position = YPoint(m_position.x(), 350.f - m_sprite->height());
+        m_position = YPoint<int>(m_position.x(), 350 - m_sprite->height());
         m_velocity = YVector(m_velocity.x(), 0.f);
         m_onGround = true;
     }

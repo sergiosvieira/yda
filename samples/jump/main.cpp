@@ -73,7 +73,7 @@ int main(int argc, char** argv)
     /** creates window **/
     YObjectManager* objectManager = new YObjectManager();
     YMain* game = new YMain("Jumping - sergiosvieira@gmail.com",
-                            YSize(640, 480),
+                            YSize<int>(640, 480),
                             *objectManager);
     
     /** loads resources **/

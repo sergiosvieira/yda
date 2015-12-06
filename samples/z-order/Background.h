@@ -32,11 +32,11 @@ class Background: public YObject
 public:
 	Background(YSprite* a_sprite): YObject(nullptr,
 										   a_sprite,
-										   YPoint(0.f, 0.f),
-										   YPoint(0.f, 0.f),
+										   YPoint<int>(0, 0),
+										   YPoint<int>(0, 0),
 										   true)
 	{
-		m_position = YPoint(-(m_sprite->width() - 320.f), 0.f);
+		m_position = YPoint<int>(-(m_sprite->width() - 320.f), 0.f);
 		m_velocity = YVector(4.f, 0.f);
 	};
 	virtual void update(float a_deltaT)
@@ -45,7 +45,7 @@ public:
 
 		if (m_position.x() == 0)
 		{
-			m_position = YPoint(-(m_sprite->width() - 320.f), 0.f);
+			m_position = YPoint<int>(-(m_sprite->width() - 320.f), 0.f);
 		}
 	} 	
 protected:

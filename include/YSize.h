@@ -6,8 +6,7 @@
  #define __YSIZE__
 
 //! Size structure
-template <typename T>
-struct YSize
+template <typename T> struct YSize
 {
     T width;
     T height;

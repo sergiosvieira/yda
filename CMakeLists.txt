@@ -29,6 +29,8 @@ elseif (APPLE)
 	set(PLATFORM "APPLE")
 endif (UNIX)
 
+message(STATUS "Platform-> " ${PLATFORM})
+
 # Generate platform header
 configure_file (${CMAKE_SOURCE_DIR}/cmake/YPlatform.h.in ${CMAKE_SOURCE_DIR}/include/YPlatform.h)
 

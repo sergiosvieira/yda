@@ -28,7 +28,8 @@
 #include "YObjectManager.h"
 #include "Bird.h"
 #include "Cloud.h"
- #include "Background.h"
+#include "Background.h"
+#include "YSpriteHeader.h"
 
 /** STL **/
 #include <array>
@@ -52,7 +53,7 @@ void createClouds(YMain* a_main,
         float z = (i % 2 == 0) ? 0.f : 2.f;
         YSprite* cloudSprite = new YSprite(a_manager->findByName(name));
         Cloud* cloud01 = new Cloud(cloudSprite, a_main);
-        YPoint position = cloud01->position();
+        YPoint<int> position = cloud01->position();
         
         position.z(z);
         cloud01->position(position);
@@ -71,7 +72,7 @@ int main(int argc, char** argv)
     
     YObjectManager* objectManager = new YObjectManager();
     YMain* game = new YMain("Z-Order - sergiosvieira@gmail.com",
-                            YSize(320, 240),
+                            YSize<int>(320, 240),
                             *objectManager);
     
     /** Load Resources **/
@@ -112,11 +113,10 @@ int main(int argc, char** argv)
     
 
     /** Creates Bird **/
+    YFrame frame(0, 0, 5, YSize<int>(32, 32));
     YSpriteSheet* birdSprite = new YSpriteSheet(manager->findByName(kRedBird),
-                                                YFrame(0, 0, 5),
-                                                64,
-                                                40,
-                                                20);
+                                                frame,
+                                                25);
     Bird* bird = new Bird(birdSprite);
     
     /** Update/Render Objects **/
